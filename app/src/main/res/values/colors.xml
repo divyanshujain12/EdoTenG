@@ -7,4 +7,5 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="dark_grey">#5D5D5D</color>
+    <color name="signup_white_background">#F2F2F2</color>
 </resources>

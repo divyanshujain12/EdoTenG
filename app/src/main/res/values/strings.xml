@@ -6,4 +6,7 @@
     <string name="sign_in">SING IN</string>
     <string name="sign_up">SIGN UP</string>
     <string name="not_a_member_sign_up">Not a member! Sign Up!</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="conf_password">Confirm Password</string>
 </resources>
