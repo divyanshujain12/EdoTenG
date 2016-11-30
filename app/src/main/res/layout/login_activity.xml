@@ -115,6 +115,7 @@
             android:background="@drawable/rounded_corner_dark_grey"
             android:text="@string/sign_up"
             android:textColor="@color/white"
+            android:onClick="signUp"
             android:textSize="@dimen/eighteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />
     </LinearLayout>
