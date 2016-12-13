@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/eight_dp"
+    android:orientation="horizontal"
+    tools:showIn="@layout/activity_search_keyword">
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_by"
+        android:textColor="@color/white"
+        android:padding="@dimen/three_dp"
+        android:textSize="@dimen/twelve_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/allTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all"
+        android:padding="@dimen/three_dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twelve_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/materialTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/material"
+        android:padding="@dimen/three_dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twelve_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/testSeriesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_series"
+        android:padding="@dimen/three_dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twelve_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/videosLiveTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/videoslive"
+        android:padding="@dimen/three_dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twelve_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/classesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/classes"
+        android:padding="@dimen/three_dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twelve_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+</LinearLayout>

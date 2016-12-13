@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context="com.example.divyanshujain.edoteng.SignUpActivity">
+                tools:context="com.example.divyanshujain.edoteng.activities.SignUpActivity">
 
                 <com.neopixl.pixlui.components.textview.TextView
                     android:layout_width="wrap_content"

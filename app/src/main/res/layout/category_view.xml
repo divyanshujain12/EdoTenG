@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_home">
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_with_specific_filter"
+        android:layout_marginBottom="@dimen/twenty_dp"
+        android:textColor="@color/dark_grey"
+
+        android:textSize="@dimen/sixteen_sp" />
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category"
+        android:textColor="@color/white"
+        android:textSize="@dimen/eighteen_sp" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/five_dp"
+        android:layout_marginTop="@dimen/two_dp">
+
+        <Spinner
+            android:id="@+id/categorySP"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fourty_dp" />
+    </android.support.v7.widget.CardView>
+</LinearLayout>

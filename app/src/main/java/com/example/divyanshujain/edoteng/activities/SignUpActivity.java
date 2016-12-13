@@ -1,10 +1,11 @@
-package com.example.divyanshujain.edoteng;
+package com.example.divyanshujain.edoteng.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
+import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.button.Button;
 import com.neopixl.pixlui.components.edittext.EditText;

@@ -9,4 +9,24 @@
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
     <string name="conf_password">Confirm Password</string>
+    <string name="category">Category</string>
+    <string name="sub_category">Sub Category</string>
+    <string name="sub_sub_category">Sub-sub Category</string>
+    <string name="go">GO</string>
+    <string name="search_with_specific_filter">Search with specific filter</string>
+    <string name="search_specific_keyword">Search specific keyword</string>
+    <string name="search_keyword">Search Keyword</string>
+    <string name="type_keyword_to_search">Type keyword to search</string>
+    <string name="search_by">Search By :</string>
+    <string name="classes">Classes</string>
+    <string name="videoslive">VideosLive</string>
+    <string name="test_series">Test Series</string>
+    <string name="material">Material</string>
+    <string name="all">All</string>
+    <string name="search_result">Search Result</string>
+    <string name="sort_by">Sort By : </string>
+    <string name="detail">Details</string>
+    <string name="free">Free</string>
+    <string name="dummy_title">Instructed By: APH Book</string>
+    <string name="dummy_desc">Based on the latest syllabus and guidelines on continuous and comprehensive evaluation (CCE) introduce by CBSE</string>
 </resources>

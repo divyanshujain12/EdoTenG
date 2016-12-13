@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/five_dp">
+
+    <ImageView
+        android:id="@+id/categoryIconIV"
+        android:layout_width="@dimen/fourty_dp"
+        android:layout_height="@dimen/fourty_dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/five_dp"
+        android:layout_marginStart="@dimen/five_dp"
+        android:orientation="vertical">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/dummy_title"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/sixteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/descTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:alpha=".7"
+            android:layout_marginTop="@dimen/two_dp"
+            android:text="@string/dummy_desc"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/fourteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.neopixl.pixlui.components.textview.TextView
+                android:id="@+id/productPurchaseTypeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/eight_dp"
+                android:padding="@dimen/five_dp"
+                android:text="@string/free"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fourteen_sp"
+                pixlui:typeface="Roboto-Medium.ttf" />
+
+            <com.neopixl.pixlui.components.textview.TextView
+                android:id="@+id/detailTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/eight_dp"
+                android:padding="@dimen/five_dp"
+                android:text="@string/detail"
+                android:textColor="@color/button_color"
+                android:textSize="@dimen/fourteen_sp"
+                pixlui:typeface="Roboto-Medium.ttf" />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
