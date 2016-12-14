@@ -7,7 +7,7 @@
     android:background="@color/signup_white_background"
     android:orientation="vertical">
 
-    <include layout="@layout/custom_toolbar" />
+    <include layout="@layout/custom_toolbar_with_orange_title" />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    tools:showIn="@layout/activity_search_by_filters">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/five_dp">
+
+            <com.neopixl.pixlui.components.textview.TextView
+                android:id="@+id/categoryNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/eight_dp"
+                android:text="@string/category"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/eighteen_sp"
+                pixlui:typeface="Roboto-Medium.ttf" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five_dp"
+            app:cardElevation="@dimen/five_dp">
+
+            <com.neopixl.pixlui.components.textview.TextView
+                android:id="@+id/subCategoryNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/eight_dp"
+                android:text="@string/sub_category"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/eighteen_sp"
+                pixlui:typeface="Roboto-Medium.ttf" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+        app:cardElevation="@dimen/five_dp">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/subSubCategoryNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/eight_dp"
+            android:text="@string/sub_sub_category"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/eighteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+    </android.support.v7.widget.CardView>
+</merge>

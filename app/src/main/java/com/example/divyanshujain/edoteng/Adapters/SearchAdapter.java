@@ -16,11 +16,11 @@ import java.util.ArrayList;
  * Created by divyanshu.jain on 12/13/2016.
  */
 
-public class SearchByKeywordAdapter extends RecyclerView.Adapter<SearchByKeywordAdapter.MyViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<String> arrayList;
 
-    public SearchByKeywordAdapter(Context context, ArrayList<String> arrayList) {
+    public SearchAdapter(Context context, ArrayList<String> arrayList) {
         this.arrayList = arrayList;
         this.context = context;
     }

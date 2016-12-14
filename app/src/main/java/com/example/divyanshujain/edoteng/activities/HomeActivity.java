@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.R;
 import com.neopixl.pixlui.components.button.Button;
 import com.neopixl.pixlui.components.edittext.EditText;
@@ -15,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     @InjectView(R.id.categorySP)
     Spinner categorySP;
@@ -45,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.goBT:
                 break;
             case R.id.searchET:
-                startActivity(new Intent(this, SearchKeywordActivity.class));
+                startActivity(new Intent(this, SearchByKeywordActivity.class));
                 break;
         }
     }

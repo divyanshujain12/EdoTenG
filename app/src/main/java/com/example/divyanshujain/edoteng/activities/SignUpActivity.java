@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
+import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.button.Button;
@@ -13,7 +14,7 @@ import com.neopixl.pixlui.components.edittext.EditText;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
     @InjectView(R.id.toolbarView)
     Toolbar toolbarView;
     @InjectView(R.id.usernameET)

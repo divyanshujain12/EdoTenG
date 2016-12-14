@@ -29,4 +29,8 @@
     <string name="free">Free</string>
     <string name="dummy_title">Instructed By: APH Book</string>
     <string name="dummy_desc">Based on the latest syllabus and guidelines on continuous and comprehensive evaluation (CCE) introduce by CBSE</string>
+    <string name="search_with_keyword">Search With Keyword</string>
+    <string name="search_with_filters">Search With Filters</string>
+    <string name="working_please_wait">Working! Please Wait...</string>
+    <string name="no_internet_connection">No Internet Connection</string>
 </resources>

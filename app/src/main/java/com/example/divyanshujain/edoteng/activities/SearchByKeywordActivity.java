@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.divyanshujain.edoteng.Adapters.SearchByKeywordAdapter;
+import com.example.divyanshujain.edoteng.Adapters.SearchAdapter;
+import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.edittext.EditText;
 import com.neopixl.pixlui.components.textview.TextView;
 
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SearchKeywordActivity extends AppCompatActivity {
+public class SearchByKeywordActivity extends BaseActivity {
 
     @InjectView(R.id.searchKeyTV)
     TextView searchKeyTV;
@@ -41,7 +45,11 @@ public class SearchKeywordActivity extends AppCompatActivity {
     @InjectView(R.id.activity_search_keyword)
     LinearLayout activitySearchKeyword;
 
-    SearchByKeywordAdapter searchByKeywordAdapter;
+    SearchAdapter searchAdapter;
+    @InjectView(R.id.toolbarView)
+    Toolbar toolbarView;
+    @InjectView(R.id.sortingByFL)
+    FrameLayout sortingByFL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +61,10 @@ public class SearchKeywordActivity extends AppCompatActivity {
     }
 
     private void InitViews() {
+        CommonFunctions.getInstance().configureToolbarWithBackButton(this,toolbarView,getString(R.string.search_with_keyword));
         searchKeyTV.setTextColor(Color.WHITE);
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
-        searchByKeywordAdapter = new SearchByKeywordAdapter(this, new ArrayList<String>());
-        searchedKeywordRV.setAdapter(searchByKeywordAdapter);
+        searchAdapter = new SearchAdapter(this, new ArrayList<String>());
+        searchedKeywordRV.setAdapter(searchAdapter);
     }
 }
