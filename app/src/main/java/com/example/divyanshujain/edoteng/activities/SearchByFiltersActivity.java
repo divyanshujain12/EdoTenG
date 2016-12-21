@@ -1,10 +1,12 @@
 package com.example.divyanshujain.edoteng.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -52,7 +54,14 @@ public class SearchByFiltersActivity extends BaseActivity {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.search_with_filters));
 
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
-        searchAdapter = new SearchAdapter(this, new ArrayList<String>());
+        searchAdapter = new SearchAdapter(this, new ArrayList<String>(),this);
         searchedKeywordRV.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void onClickItem(int position, View view) {
+        super.onClickItem(position, view);
+        Intent intent = new Intent(this, DescriptionActivity.class);
+        startActivity(intent);
     }
 }

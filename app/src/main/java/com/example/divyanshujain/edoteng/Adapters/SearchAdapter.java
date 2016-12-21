@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.divyanshujain.edoteng.Interfaces.RecyclerViewClick;
 import com.example.divyanshujain.edoteng.R;
 import com.neopixl.pixlui.components.textview.TextView;
 
@@ -19,8 +20,10 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<String> arrayList;
+    private RecyclerViewClick recyclerViewClick;
 
-    public SearchAdapter(Context context, ArrayList<String> arrayList) {
+    public SearchAdapter(Context context, ArrayList<String> arrayList,RecyclerViewClick recyclerViewClick) {
+        this.recyclerViewClick = recyclerViewClick;
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -34,7 +37,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewClick.onClickItem(holder.getAdapterPosition(),view);
+            }
+        });
 
     }
 

@@ -21,7 +21,7 @@
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.SearchByKeywordActivity" />
         <activity android:name=".activities.SearchByFiltersActivity" />
-        <activity android:name=".activities.DescriptionActivity"></activity>
+        <activity android:name=".activities.DescriptionActivity"/>
     </application>
 
 </manifest>

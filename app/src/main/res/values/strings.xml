@@ -41,5 +41,6 @@
     <string name="name">Name:</string>
     <string name="seller_name">Seller Name</string>
     <string name="item_name">Item Name</string>
+    <string name="desc">Description</string>
 
 </resources>

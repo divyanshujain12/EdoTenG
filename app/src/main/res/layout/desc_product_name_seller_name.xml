@@ -23,7 +23,7 @@
             pixlui:typeface="Roboto-Medium.ttf" />
 
         <com.neopixl.pixlui.components.textview.TextView
-            android:id="@+id/physicalVersionPriceTV"
+            android:id="@+id/productNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/five_dp"
@@ -52,7 +52,7 @@
             pixlui:typeface="Roboto-Medium.ttf" />
 
         <com.neopixl.pixlui.components.textview.TextView
-            android:id="@+id/digitalVersionPriceTV"
+            android:id="@+id/sellerNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/five_dp"
