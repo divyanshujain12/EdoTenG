@@ -33,4 +33,13 @@
     <string name="search_with_filters">Search With Filters</string>
     <string name="working_please_wait">Working! Please Wait...</string>
     <string name="no_internet_connection">No Internet Connection</string>
+    <string name="course_description">Course Description</string>
+    <string name="review">Review</string>
+    <string name="physical_version_price">Physical Price</string>
+    <string name="digital_version_price">Digital Price</string>
+    <string name="sold_by">Sold By:</string>
+    <string name="name">Name:</string>
+    <string name="seller_name">Seller Name</string>
+    <string name="item_name">Item Name</string>
+
 </resources>

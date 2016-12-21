@@ -1,27 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_description"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-<include layout="@layout/custom_toolbar_with_white_title"/>
+    android:background="@color/signup_white_background"
+    android:orientation="vertical">
+
+    <include layout="@layout/custom_toolbar_with_white_title" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.5">
+        android:layout_weight="4">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/dummy_book"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/dummy_book" />
     </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5.5">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:background="@color/signup_white_background"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/fifteen_dp"
+        android:paddingStart="@dimen/fifteen_dp">
 
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/descTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_top_corners_white"
+            android:gravity="center"
+            android:padding="@dimen/ten_dp"
+            android:text="@string/course_description"
+            android:textSize="@dimen/sixteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf"/>
 
-
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/reviewTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_top_corners_light_grey"
+            android:gravity="center"
+            android:padding="@dimen/ten_dp"
+            android:text="@string/review"
+            android:textSize="@dimen/sixteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf"/>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragmentsFL"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@color/white"
+        android:orientation="horizontal"/>
 </LinearLayout>
