@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/seventy_dp"
+    android:layout_gravity="bottom"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@color/button_color"
+    >
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/goToShoppingTV"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/go_to_shopping_cart"
+        android:drawableTop="@drawable/ic_white_cart"
+        android:textColor="@color/white"
+        android:textSize="@dimen/thirteen_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        pixlui:typeface="Roboto-Medium.ttf" />
+</LinearLayout>

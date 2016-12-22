@@ -10,6 +10,6 @@
     app:layout_collapseMode="parallax"
     app:layout_scrollFlags="scroll|enterAlways"
     app:subtitleTextColor="@color/colorPrimary"
-    app:theme="@style/CustomToolbar"
+    app:theme="@style/CustomToolbarWhite"
     app:title="@string/app_name"
     app:titleTextColor="@color/white" />

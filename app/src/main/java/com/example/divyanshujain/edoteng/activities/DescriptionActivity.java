@@ -1,10 +1,13 @@
 package com.example.divyanshujain.edoteng.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -55,5 +58,21 @@ public class DescriptionActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.descriptipn_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = null;
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                startActivity(new Intent(this, CartActivity.class));
+                break;
+        }
+        return true;
+    }
 }
 

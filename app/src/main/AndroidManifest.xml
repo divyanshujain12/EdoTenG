@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.divyanshujain.edoteng">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".activities.MyApp"
         android:allowBackup="true"
@@ -21,7 +23,11 @@
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.SearchByKeywordActivity" />
         <activity android:name=".activities.SearchByFiltersActivity" />
-        <activity android:name=".activities.DescriptionActivity"/>
+        <activity android:name=".activities.DescriptionActivity" />
+        <activity android:name=".activities.CartActivity" />
+        <activity android:name=".activities.WishlistActivity" />
+        <activity android:name=".activities.AddShippingAddressActivity" />
+        <activity android:name=".activities.ShippingAddressesActivity"></activity>
     </application>
 
 </manifest>

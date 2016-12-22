@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:id="@+id/activity_shipping_address"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/seventy_dp">
+
+        <include layout="@layout/custom_toolbar_with_orange_title" />
+
+        <include layout="@layout/cart_price_bar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/ten_dp">
+
+                <include layout="@layout/full_name_view" />
+
+                <include layout="@layout/phone_number_view" />
+
+                <include layout="@layout/pin_code_view" />
+
+                <include layout="@layout/flat_number_view" />
+
+                <include layout="@layout/landmark_view" />
+
+                <include layout="@layout/town_view" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <include layout="@layout/shipping_address_bottom_view"/>
+</FrameLayout>

@@ -42,5 +42,25 @@
     <string name="seller_name">Seller Name</string>
     <string name="item_name">Item Name</string>
     <string name="desc">Description</string>
+    <string name="home">HOME</string>
+    <string name="cart">Cart</string>
+    <string name="remove">Remove</string>
+    <string name="add_to_wishlist">Add To Wishlist</string>
+    <string name="proceed_to_shipping_address">Proceed To Shipping Address</string>
+    <string name="go_to_wishlist">Go To Wishlist</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="go_to_shopping_cart">Go To Shopping Cart</string>
+    <string name="wish_list">WishList</string>
+    <string name="full_name">Full Name</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="flat_house_number_floor_building">Flat/House Number/Floor/Building</string>
+    <string name="landmark">Landmark</string>
+    <string name="town_city">Town/City</string>
+    <string name="proceed_to_payment">Proceed To Payment</string>
+    <string name="delete_address">Delete Address</string>
+    <string name="edit_address">Edit Address</string>
+    <string name="ship_to_this_address">Ship To This Address</string>
+    <string name="ship_addresses">Shipping Addresses</string>
+    <string name="add_address">Add Address</string>
 
 </resources>

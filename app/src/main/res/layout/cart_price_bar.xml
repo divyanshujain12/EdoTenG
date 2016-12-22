@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/ten_dp"
+    tools:showIn="@layout/activity_cart">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Price Of Item"
+            android:textColor="@color/white"
+            android:textSize="@dimen/thirteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/totalItemsPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:gravity="center"
+            android:text="RS 2400"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighteen_sp"
+            pixlui:typeface="Roboto-Regular.ttf" />
+    </LinearLayout>
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="@dimen/twenty_four_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Shipping Charge"
+            android:textColor="@color/white"
+            android:textSize="@dimen/thirteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/shippingPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:gravity="center"
+            android:text="RS 2400"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighteen_sp"
+            pixlui:typeface="Roboto-Regular.ttf" />
+    </LinearLayout>
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:text="="
+        android:textColor="@color/white"
+        android:textSize="@dimen/twenty_four_sp"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Total Price"
+            android:textColor="@color/white"
+            android:textSize="@dimen/thirteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/totalPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:gravity="center"
+            android:text="RS 2400"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighteen_sp"
+            pixlui:typeface="Roboto-Regular.ttf" />
+    </LinearLayout>
+</LinearLayout>

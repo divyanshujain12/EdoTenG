@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/five_dp"
+    card_view:cardCornerRadius="@dimen/five_dp"
+    card_view:cardElevation="@dimen/five_dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/itemIV"
+            android:layout_width="@dimen/one_hundred_dp"
+            android:layout_height="@dimen/one_hundred_dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/itemNameTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Item Name"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/eighteen_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/itemPriceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:alpha=".8"
+                    android:text="Rs 2400"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/sixteen_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/detailTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:alpha=".8"
+                    android:padding="@dimen/ten_dp"
+                    android:text="@string/detail"
+                    android:textColor="@color/button_color"
+                    android:textSize="@dimen/twelve_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/addToWishlistTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:alpha=".8"
+                    android:padding="@dimen/ten_dp"
+
+                    android:text="@string/add_to_wishlist"
+                    android:textColor="@color/button_color"
+                    android:textSize="@dimen/twelve_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/removeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:alpha=".8"
+                    android:padding="@dimen/ten_dp"
+
+                    android:text="@string/remove"
+                    android:textColor="@color/button_color"
+                    android:textSize="@dimen/twelve_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

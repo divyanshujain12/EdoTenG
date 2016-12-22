@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_shipping_addresses"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/seventy_dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/custom_toolbar_with_orange_title" />
+
+        <include layout="@layout/cart_price_bar" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/addressesRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/five_dp" />
+    </LinearLayout>
+
+    <include layout="@layout/addresses_bottom_view" />
+</FrameLayout>
