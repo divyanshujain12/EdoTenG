@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
 
 import com.example.divyanshujain.edoteng.Interfaces.RecyclerViewClick;
 import com.example.divyanshujain.edoteng.R;
@@ -23,6 +23,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.MyVi
     private Context context;
     private ArrayList<String> arrayList;
     private RecyclerViewClick recyclerViewClick;
+    private AppCompatRadioButton lastSelectedRadioButton = null;
 
     public AddressesAdapter(Context context, ArrayList<String> arrayList, RecyclerViewClick recyclerViewClick) {
         this.recyclerViewClick = recyclerViewClick;
@@ -44,10 +45,13 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerViewClick.onClickItem(holder.getAdapterPosition(), view);
+                if (lastSelectedRadioButton != null && lastSelectedRadioButton.isChecked())
+                    lastSelectedRadioButton.setChecked(false);
+                holder.selectAddressRB.setChecked(true);
+                lastSelectedRadioButton = holder.selectAddressRB;
+
             }
         });
-
     }
 
     @Override

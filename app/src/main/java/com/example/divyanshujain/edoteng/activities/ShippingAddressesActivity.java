@@ -37,6 +37,8 @@ public class ShippingAddressesActivity extends BaseActivity {
     TextView proceedToPaymentTV;
     @InjectView(R.id.activity_shipping_addresses)
     FrameLayout activityShippingAddresses;
+    @InjectView(R.id.addAddressTV)
+    TextView addAddressTV;
 
     private AddressesAdapter addressesAdapter;
 
@@ -55,13 +57,17 @@ public class ShippingAddressesActivity extends BaseActivity {
         addressesRV.setAdapter(addressesAdapter);
     }
 
-    @OnClick({R.id.deleteAddressTV, R.id.proceedToPaymentTV})
+    @OnClick({R.id.deleteAddressTV, R.id.proceedToPaymentTV, R.id.addAddressTV})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.addAddressTV:
+                break;
             case R.id.deleteAddressTV:
-                break;
+            break;
             case R.id.proceedToPaymentTV:
-                break;
+            break;
         }
     }
+
+
 }

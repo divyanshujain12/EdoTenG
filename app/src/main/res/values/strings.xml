@@ -62,5 +62,6 @@
     <string name="ship_to_this_address">Ship To This Address</string>
     <string name="ship_addresses">Shipping Addresses</string>
     <string name="add_address">Add Address</string>
+    <string name="add_new_address">Add New Address</string>
 
 </resources>
