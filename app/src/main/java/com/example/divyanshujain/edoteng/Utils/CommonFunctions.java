@@ -1,15 +1,21 @@
 package com.example.divyanshujain.edoteng.Utils;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+
+import com.androidadvance.topsnackbar.TSnackbar;
 
 /**
  * Created by divyanshu.jain on 11/30/2016.
  */
 public class CommonFunctions {
     private static CommonFunctions ourInstance = new CommonFunctions();
+
 
     public static CommonFunctions getInstance() {
         return ourInstance;
@@ -42,4 +48,5 @@ public class CommonFunctions {
             }
         });
     }
+
 }

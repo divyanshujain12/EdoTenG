@@ -26,7 +26,7 @@
             <com.neopixl.pixlui.components.textview.TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/username"
+                android:text="@string/name"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/fifteen_sp"
                 pixlui:typeface="Roboto-Medium.ttf" />
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/two_dp"
-                app:cardElevation="@dimen/ten_dp">
+                app:cardElevation="@dimen/two_dp">
 
                 <com.neopixl.pixlui.components.edittext.EditText
                     android:id="@+id/emailET"
@@ -64,26 +64,29 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/fifteen_sp"
                 pixlui:typeface="Roboto-Medium.ttf" />
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/two_dp"
-                app:cardElevation="@dimen/ten_dp">
-            <com.neopixl.pixlui.components.edittext.EditText
-                android:id="@+id/passwordET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner_white_full"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:padding="@dimen/ten_dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/eighteen_sp"
-                pixlui:typeface="Roboto-Regular.ttf" />
+                app:cardElevation="@dimen/two_dp">
+
+                <com.neopixl.pixlui.components.edittext.EditText
+                    android:id="@+id/passwordET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corner_white_full"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/ten_dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/eighteen_sp"
+                    pixlui:typeface="Roboto-Regular.ttf" />
             </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/forgotPassTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/ten_dp"
@@ -98,8 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ten_dp"
             android:background="@drawable/rounded_corner_orange_filled"
-            android:text="@string/sign_in"
             android:onClick="SignIn"
+            android:text="@string/sign_in"
             android:textColor="@color/white"
             android:textSize="@dimen/eighteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />

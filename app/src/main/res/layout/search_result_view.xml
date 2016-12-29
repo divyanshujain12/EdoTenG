@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="@dimen/ten_dp"
@@ -30,18 +31,18 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.neopixl.pixlui.components.textview.TextView
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sort_by"
-                android:textColor="@color/button_color"
-                android:textSize="@dimen/sixteen_sp"
-                pixlui:typeface="Roboto-Medium.ttf" />
-
+                android:layout_marginTop="@dimen/two_dp"
+                app:cardElevation="@dimen/five_dp">
             <Spinner
                 android:id="@+id/filterSP"
+                android:padding="@dimen/five_dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:entries="@array/sorting_array"/>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </FrameLayout>

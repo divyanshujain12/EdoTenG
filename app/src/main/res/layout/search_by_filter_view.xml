@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:tools="http://schemas.android.com/tools"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/activity_search_by_filters">
 
     <LinearLayout
@@ -22,7 +22,7 @@
                 android:padding="@dimen/eight_dp"
                 android:text="@string/category"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/eighteen_sp"
+                android:textSize="@dimen/fourteen_sp"
                 pixlui:typeface="Roboto-Medium.ttf" />
         </android.support.v7.widget.CardView>
 
@@ -39,11 +39,12 @@
                 android:padding="@dimen/eight_dp"
                 android:text="@string/sub_category"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/eighteen_sp"
+                android:textSize="@dimen/fourteen_sp"
                 pixlui:typeface="Roboto-Medium.ttf" />
         </android.support.v7.widget.CardView>
-    </LinearLayout>
 
+
+    </LinearLayout>
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +58,8 @@
             android:padding="@dimen/eight_dp"
             android:text="@string/sub_sub_category"
             android:textColor="@color/dark_grey"
-            android:textSize="@dimen/eighteen_sp"
+            android:textSize="@dimen/fourteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />
     </android.support.v7.widget.CardView>
+
 </merge>

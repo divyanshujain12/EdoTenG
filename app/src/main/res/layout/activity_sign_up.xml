@@ -29,7 +29,7 @@
                 <com.neopixl.pixlui.components.textview.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/username"
+                    android:text="@string/name"
                     android:textColor="@color/dark_grey"
                     android:textSize="@dimen/fifteen_sp"
                     pixlui:typeface="Roboto-Medium.ttf" />

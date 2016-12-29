@@ -32,6 +32,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".activities.AddShippingAddressActivity" />
         <activity android:name=".activities.ShippingAddressesActivity" />
+        <activity android:name=".activities.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>
