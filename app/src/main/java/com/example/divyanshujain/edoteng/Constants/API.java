@@ -9,6 +9,6 @@ public interface API {
     String REGISTRATION = BASE + "registration";
     String LOGIN = BASE + "login";
     String CONTACT_US = BASE + "contactus";
-    String FORGOT_PASSWORD = BASE + "forgotpassword";
+    String FORGOT_PASSWORD = BASE + "forgetpassword";
     String CHANGE_PASSWORD = BASE + "changepassword";
 }

@@ -78,4 +78,10 @@ public class HomeActivity extends BaseActivity {
         }
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchET.setFocusable(false);
+    }
 }

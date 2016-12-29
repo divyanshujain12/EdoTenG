@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.signInBT:
-               // validateFields();
+                // validateFields();
                 goToHome();
                 break;
             case R.id.signUpBT:
@@ -77,8 +77,8 @@ public class LoginActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.forgotPassTV:
-                /*Intent forgotPasswordIntent = new Intent(this, ForgotPassword.class);
-                startActivity(forgotPasswordIntent);*/
+                Intent forgotPasswordIntent = new Intent(this, ForgotPasswordActivity.class);
+                startActivity(forgotPasswordIntent);
                 break;
         }
     }
