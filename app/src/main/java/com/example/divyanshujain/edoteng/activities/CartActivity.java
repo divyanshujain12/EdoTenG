@@ -2,6 +2,7 @@ package com.example.divyanshujain.edoteng.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -36,10 +37,8 @@ public class CartActivity extends BaseActivity {
     RecyclerView productRV;
     @InjectView(R.id.activity_cart)
     FrameLayout activityCart;
-    @InjectView(R.id.goToWishListTV)
-    TextView goToWishListTV;
-    @InjectView(R.id.proceedToShipTV)
-    TextView proceedToShipTV;
+    @InjectView(R.id.checkoutFAB)
+    FloatingActionButton checkoutFAB;
 
     private CartAdapter cartAdapter;
 
@@ -72,13 +71,10 @@ public class CartActivity extends BaseActivity {
         return true;
     }
 
-    @OnClick({R.id.goToWishListTV, R.id.proceedToShipTV})
+    @OnClick({R.id.checkoutFAB})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.goToWishListTV:
-                startActivity(new Intent(this, WishlistActivity.class));
-                break;
-            case R.id.proceedToShipTV:
+            case R.id.checkoutFAB:
                 startActivity(new Intent(this, AddShippingAddressActivity.class));
                 break;
         }

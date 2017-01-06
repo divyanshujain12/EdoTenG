@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="@string/full_name"
-        android:textSize="@dimen/eighteen_sp"
+        android:textSize="@dimen/fifteen_sp"
         pixlui:typeface="Roboto-Regular.ttf" />
 
     <android.support.v7.widget.CardView

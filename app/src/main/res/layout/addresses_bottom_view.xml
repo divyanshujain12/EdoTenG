@@ -9,13 +9,13 @@
     android:orientation="horizontal">
 
     <com.neopixl.pixlui.components.textview.TextView
-        android:id="@+id/addAddressTV"
+        android:id="@+id/updateAddressTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:drawableTop="@drawable/ic_save_address"
+        android:drawableTop="@drawable/update_address"
         android:gravity="center"
-        android:text="@string/add_new_address"
+        android:text="@string/update_address"
         android:textColor="@color/white"
         android:textSize="@dimen/thirteen_sp"
         pixlui:typeface="Roboto-Medium.ttf" />
@@ -30,6 +30,7 @@
         android:text="@string/delete_address"
         android:textColor="@color/white"
         android:textSize="@dimen/thirteen_sp"
+        android:visibility="gone"
         pixlui:typeface="Roboto-Medium.ttf" />
 
     <com.neopixl.pixlui.components.textview.TextView

@@ -15,9 +15,9 @@
             android:orientation="vertical"
             android:padding="@dimen/ten_dp">
 
+            <include layout="@layout/desc_product_name_seller_name" />
             <include layout="@layout/desc_frag_rate_bar" />
 
-            <include layout="@layout/desc_product_name_seller_name" />
 
             <com.neopixl.pixlui.components.textview.TextView
                 android:id="@+id/descriptionTV"

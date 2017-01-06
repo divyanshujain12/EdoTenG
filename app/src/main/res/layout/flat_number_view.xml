@@ -11,7 +11,7 @@
         android:layout_marginTop="@dimen/ten_dp"
         android:gravity="center_vertical"
         android:text="@string/flat_house_number_floor_building"
-        android:textSize="@dimen/eighteen_sp"
+        android:textSize="@dimen/fifteen_sp"
         pixlui:typeface="Roboto-Regular.ttf" />
 
     <android.support.v7.widget.CardView

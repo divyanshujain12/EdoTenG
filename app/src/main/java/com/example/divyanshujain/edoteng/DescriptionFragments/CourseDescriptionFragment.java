@@ -35,8 +35,6 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView descriptionTV;
     @InjectView(R.id.downloadDigitalTV)
     TextView downloadDigitalTV;
-    @InjectView(R.id.addToWishListTV)
-    TextView addToWishListTV;
     @InjectView(R.id.addToCartTV)
     TextView addToCartTV;
 
