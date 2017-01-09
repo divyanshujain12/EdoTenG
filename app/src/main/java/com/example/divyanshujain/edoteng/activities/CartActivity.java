@@ -75,7 +75,7 @@ public class CartActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.checkoutFAB:
-                startActivity(new Intent(this, AddShippingAddressActivity.class));
+                startActivity(new Intent(this, ShippingAddressesActivity.class));
                 break;
         }
     }

@@ -45,6 +45,18 @@ public class SignUpActivity extends BaseActivity {
     LinearLayout activitySignUp;
     @InjectView(R.id.signUpBT)
     Button signUpBT;
+    @InjectView(R.id.fullNameET)
+    EditText fullNameET;
+    @InjectView(R.id.phoneNumberET)
+    EditText phoneNumberET;
+    @InjectView(R.id.pinCodeET)
+    EditText pinCodeET;
+    @InjectView(R.id.flatNumberET)
+    EditText flatNumberET;
+    @InjectView(R.id.landMarkET)
+    EditText landMarkET;
+    @InjectView(R.id.cityET)
+    EditText cityET;
     private Validation validation;
     private HashMap<View, String> formValues;
     private String genderStr;

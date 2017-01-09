@@ -3,7 +3,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
-    tools:showIn="@layout/activity_add_shipping_address">
+    tools:showIn="@layout/activity_add_shipping_address"
+    >
 
     <com.neopixl.pixlui.components.textview.TextView
         android:layout_width="match_parent"
