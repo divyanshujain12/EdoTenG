@@ -54,6 +54,17 @@ public class SearchByKeywordActivity extends BaseActivity {
     @InjectView(R.id.sortingByFL)
     FrameLayout sortingByFL;
 
+
+    private static String ADD_DATE_DESC = "add_date___DESC";
+    private static String VIEWS_DESC = "views___DESC";
+    private static String RATING_DESC = "rating___DESC";
+    private static String ADD_DATE_ASC = "add_date___ASC";
+    private static String PRODUCT_NAME_ASC = "product_name___ASC";
+    private static String PRODUCT_NAME_DESC = "product_name___DESC";
+    private static String DOWNLOADABLE_PRICE_ASC = "downloadable_price___ASC";
+    private static String DOWNLOADABLE_PRICE_DESC = "downloadable_price___DESC";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
