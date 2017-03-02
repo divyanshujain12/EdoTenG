@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by divyanshu.jain on 2/28/2017.
  */
 
-public class ProductModel implements Parcelable {
+public class ProductModel  implements Parcelable{
     private String brand_title;
     private String id;
     private String item_type;
@@ -16,9 +16,14 @@ public class ProductModel implements Parcelable {
     private String product_name;
     private String product_file;
     private String short_description;
+    private String physical_price;
+    private String downloadable_price;
+    private String mod_url;
+    private String add_date;
+    private String rating;
+    private String can_physical_purchase;
+    private String can_downloadable_purchase;
 
-    public ProductModel() {
-    }
 
     protected ProductModel(Parcel in) {
         brand_title = in.readString();
@@ -29,6 +34,13 @@ public class ProductModel implements Parcelable {
         product_name = in.readString();
         product_file = in.readString();
         short_description = in.readString();
+        physical_price = in.readString();
+        downloadable_price = in.readString();
+        mod_url = in.readString();
+        add_date = in.readString();
+        rating = in.readString();
+        can_physical_purchase = in.readString();
+        can_downloadable_purchase = in.readString();
     }
 
     public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
@@ -48,79 +60,22 @@ public class ProductModel implements Parcelable {
         return 0;
     }
 
-    public String getBrand_title() {
-        return brand_title;
-    }
-
-    public void setBrand_title(String brand_title) {
-        this.brand_title = brand_title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getItem_type() {
-        return item_type;
-    }
-
-    public void setItem_type(String item_type) {
-        this.item_type = item_type;
-    }
-
-    public String getCat_id() {
-        return cat_id;
-    }
-
-    public void setCat_id(String cat_id) {
-        this.cat_id = cat_id;
-    }
-
-    public String getBrand_id() {
-        return brand_id;
-    }
-
-    public void setBrand_id(String brand_id) {
-        this.brand_id = brand_id;
-    }
-
-    public String getProduct_name() {
-        return product_name;
-    }
-
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
-    }
-
-    public String getProduct_file() {
-        return product_file;
-    }
-
-    public void setProduct_file(String product_file) {
-        this.product_file = product_file;
-    }
-
-    public String getShort_description() {
-        return short_description;
-    }
-
-    public void setShort_description(String short_description) {
-        this.short_description = short_description;
-    }
-
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(brand_title);
-        parcel.writeString(id);
-        parcel.writeString(item_type);
-        parcel.writeString(cat_id);
-        parcel.writeString(brand_id);
-        parcel.writeString(product_name);
-        parcel.writeString(product_file);
-        parcel.writeString(short_description);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(brand_title);
+        dest.writeString(id);
+        dest.writeString(item_type);
+        dest.writeString(cat_id);
+        dest.writeString(brand_id);
+        dest.writeString(product_name);
+        dest.writeString(product_file);
+        dest.writeString(short_description);
+        dest.writeString(physical_price);
+        dest.writeString(downloadable_price);
+        dest.writeString(mod_url);
+        dest.writeString(add_date);
+        dest.writeString(rating);
+        dest.writeString(can_physical_purchase);
+        dest.writeString(can_downloadable_purchase);
     }
 }

@@ -10,15 +10,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.divyanshujain.edoteng.Adapters.SearchAdapter;
+import com.example.divyanshujain.edoteng.Adapters.SpinnerAdapter;
+import com.example.divyanshujain.edoteng.Constants.API;
+import com.example.divyanshujain.edoteng.Constants.ApiCodes;
+import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
+import com.example.divyanshujain.edoteng.Models.BrandsModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
+import com.example.divyanshujain.edoteng.Utils.UniversalParser;
 import com.neopixl.pixlui.components.edittext.EditText;
 import com.neopixl.pixlui.components.textview.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -53,8 +64,12 @@ public class SearchByKeywordActivity extends BaseActivity {
     Toolbar toolbarView;
     @InjectView(R.id.sortingByFL)
     FrameLayout sortingByFL;
+    @InjectView(R.id.searchIV)
+    ImageView searchIV;
+    @InjectView(R.id.brandSP)
+    Spinner brandSP;
 
-
+    SpinnerAdapter spinnerAdapter;
     private static String ADD_DATE_DESC = "add_date___DESC";
     private static String VIEWS_DESC = "views___DESC";
     private static String RATING_DESC = "rating___DESC";
@@ -80,6 +95,7 @@ public class SearchByKeywordActivity extends BaseActivity {
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
         searchAdapter = new SearchAdapter(this, new ArrayList<String>(), this);
         searchedKeywordRV.setAdapter(searchAdapter);
+        CallWebService.getInstance(this, true, ApiCodes.GET_BRANDS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_BRANDS, null, this);
     }
 
     @Override
@@ -88,12 +104,28 @@ public class SearchByKeywordActivity extends BaseActivity {
         Intent intent = new Intent(this, DescriptionActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
+        super.onJsonObjectSuccess(response, apiType);
+        switch (apiType) {
+            case ApiCodes.GET_BRANDS:
+                ArrayList<BrandsModel> brandsModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), BrandsModel.class);
+                spinnerAdapter = new SpinnerAdapter(this, 0, brandsModels);
+                brandSP.setAdapter(spinnerAdapter);
+                break;
+            case ApiCodes.SEARCH:
+                break;
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.descriptipn_menu, menu);
         return true;
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = null;

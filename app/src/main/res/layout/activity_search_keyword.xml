@@ -16,7 +16,7 @@
 
         <include layout="@layout/search_keyword_view" />
 
-        <include layout="@layout/search_keyword_strip_view" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,11 +24,12 @@
             android:layout_marginTop="@dimen/five_dp"
             android:orientation="horizontal">
 
-            <include layout="@layout/type_view" />
+           <!-- <include layout="@layout/type_view" />-->
 
             <include layout="@layout/brand_view" />
 
         </LinearLayout>
+        <include layout="@layout/search_keyword_strip_view" />
     </LinearLayout>
 
     <include layout="@layout/search_result_view" />

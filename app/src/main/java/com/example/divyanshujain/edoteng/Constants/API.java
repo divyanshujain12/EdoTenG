@@ -11,4 +11,5 @@ public interface API {
     String CONTACT_US = BASE + "contactus";
     String FORGOT_PASSWORD = BASE + "forgetpassword";
     String CHANGE_PASSWORD = BASE + "changepassword";
+    String GET_BRANDS = BASE + "getAllBrands";
 }
