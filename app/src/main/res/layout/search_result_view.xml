@@ -21,7 +21,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/search_result"
             android:textColor="@color/dark_grey"
-            android:textSize="@dimen/eighteen_sp"
+            android:textSize="@dimen/sixteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />
 
         <LinearLayout

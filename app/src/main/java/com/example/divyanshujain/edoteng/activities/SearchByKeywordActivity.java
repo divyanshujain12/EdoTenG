@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,10 +23,13 @@ import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.Models.BrandsModel;
+import com.example.divyanshujain.edoteng.Models.ValidationModel;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.example.divyanshujain.edoteng.Utils.UniversalParser;
+import com.example.divyanshujain.edoteng.Utils.Validation;
+import com.neopixl.pixlui.components.button.Button;
 import com.neopixl.pixlui.components.edittext.EditText;
 import com.neopixl.pixlui.components.textview.TextView;
 
@@ -32,11 +37,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-public class SearchByKeywordActivity extends BaseActivity {
+public class SearchByKeywordActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     @InjectView(R.id.searchKeyTV)
     TextView searchKeyTV;
@@ -48,10 +55,9 @@ public class SearchByKeywordActivity extends BaseActivity {
     TextView materialTV;
     @InjectView(R.id.testSeriesTV)
     TextView testSeriesTV;
-    @InjectView(R.id.videosLiveTV)
-    TextView videosLiveTV;
-    @InjectView(R.id.classesTV)
-    TextView classesTV;
+    @InjectView(R.id.videosTV)
+    TextView videosTV;
+
     @InjectView(R.id.filterSP)
     Spinner filterSP;
     @InjectView(R.id.searchedKeywordRV)
@@ -70,16 +76,29 @@ public class SearchByKeywordActivity extends BaseActivity {
     Spinner brandSP;
 
     SpinnerAdapter spinnerAdapter;
-    private static String ADD_DATE_DESC = "add_date___DESC";
-    private static String VIEWS_DESC = "views___DESC";
-    private static String RATING_DESC = "rating___DESC";
-    private static String ADD_DATE_ASC = "add_date___ASC";
-    private static String PRODUCT_NAME_ASC = "product_name___ASC";
-    private static String PRODUCT_NAME_DESC = "product_name___DESC";
-    private static String DOWNLOADABLE_PRICE_ASC = "downloadable_price___ASC";
-    private static String DOWNLOADABLE_PRICE_DESC = "downloadable_price___DESC";
+    @InjectView(R.id.searchBT)
+    Button searchBT;
+    private TextView selectedTV;
+    /* private static String ADD_DATE_DESC = "add_date___DESC";
+     private static String VIEWS_DESC = "views___DESC";
+     private static String RATING_DESC = "rating___DESC";
+     private static String ADD_DATE_ASC = "add_date___ASC";
+     private static String PRODUCT_NAME_ASC = "product_name___ASC";
+     private static String PRODUCT_NAME_DESC = "product_name___DESC";
+     private static String DOWNLOADABLE_PRICE_ASC = "downloadable_price___ASC";
+     private static String DOWNLOADABLE_PRICE_DESC = "downloadable_price___DESC";
+ */
+    private static String ALL = "All";
+    private static String MATERIAL = "Materials";
+    private static String TEST_SERIES = "Test Series";
+    private static String VIDEOS = "Videos";
 
-
+    private String selectedSearchType;
+    private String[] sortingKeyArray, sortingValueArray;
+    Validation validation;
+    HashMap<View, String> hashMap;
+    private String selectedBrandID = "", selectedOrderBy = "";
+    ArrayList<BrandsModel> brandsModels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,12 +109,23 @@ public class SearchByKeywordActivity extends BaseActivity {
     }
 
     private void InitViews() {
+        setInitialValues();
+        createSortByMap();
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.search_with_keyword));
+        validation = new Validation();
+        validation.addValidationField(new ValidationModel(searchET, Validation.TYPE_EMPTY_FIELD_VALIDATION, getString(R.string.err_msg_search)));
         searchKeyTV.setTextColor(Color.WHITE);
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
         searchAdapter = new SearchAdapter(this, new ArrayList<String>(), this);
         searchedKeywordRV.setAdapter(searchAdapter);
-        CallWebService.getInstance(this, true, ApiCodes.GET_BRANDS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_BRANDS, null, this);
+        CallWebService.getInstance(this, false, ApiCodes.GET_BRANDS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_BRANDS, null, this);
+        filterSP.setOnItemSelectedListener(this);
+    }
+
+    private void setInitialValues() {
+        selectedTV = allTV;
+        setTextSizeToTextView(allTV, false);
+        selectedSearchType = ALL;
     }
 
     @Override
@@ -110,9 +140,10 @@ public class SearchByKeywordActivity extends BaseActivity {
         super.onJsonObjectSuccess(response, apiType);
         switch (apiType) {
             case ApiCodes.GET_BRANDS:
-                ArrayList<BrandsModel> brandsModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), BrandsModel.class);
+                brandsModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), BrandsModel.class);
                 spinnerAdapter = new SpinnerAdapter(this, 0, brandsModels);
                 brandSP.setAdapter(spinnerAdapter);
+                brandSP.setOnItemSelectedListener(this);
                 break;
             case ApiCodes.SEARCH:
                 break;
@@ -135,5 +166,79 @@ public class SearchByKeywordActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    private void createSortByMap() {
+        sortingKeyArray = getResources().getStringArray(R.array.sorting_array);
+        sortingValueArray = getResources().getStringArray(R.array.sorting_value_array);
+    }
+
+    @OnClick({R.id.allTV, R.id.materialTV, R.id.testSeriesTV, R.id.videosTV})
+    public void onClick(View view) {
+        if (selectedTV == ((TextView) view)) {
+            return;
+        } else {
+            switch (view.getId()) {
+                case R.id.allTV:
+                    selectedSearchType = ALL;
+                    break;
+                case R.id.materialTV:
+                    selectedSearchType = MATERIAL;
+                    break;
+                case R.id.testSeriesTV:
+                    selectedSearchType = TEST_SERIES;
+                    break;
+                case R.id.videosTV:
+                    selectedSearchType = VIDEOS;
+                    break;
+            }
+            setTextSizeToTextView(selectedTV, true);
+            setTextSizeToTextView((TextView) view, false);
+            selectedTV = ((TextView) view);
+        }
+    }
+
+    private void setTextSizeToTextView(TextView textView, boolean resetTV) {
+        if (resetTV)
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.fourteen_sp));
+        else
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.sixteen_sp));
+    }
+
+    @OnClick(R.id.searchBT)
+    public void onClick() {
+        hashMap = validation.validate(this);
+        if (hashMap != null) {
+            CallWebService.getInstance(this, true, ApiCodes.SEARCH).hitJsonObjectRequestAPI(CallWebService.POST, API.PRODUCT_LISTING_FILER, createJsonForGettingSearchResult(), this);
+        }
+    }
+
+    private JSONObject createJsonForGettingSearchResult() {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.SEARCH_KEYWORDS, hashMap.get(searchET));
+            jsonObject.put(Constants.SEARCH_TYPE, selectedSearchType);
+            jsonObject.put(Constants.C_BRAND_ID, selectedBrandID);
+            jsonObject.put(Constants.ORDER_BY, selectedOrderBy);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int viewId = view.getId();
+        if (viewId == R.id.spinnerItemTV) {
+            selectedBrandID = brandsModels.get(position).getId();
+        } else {
+            selectedOrderBy = sortingValueArray[position];
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -98,7 +98,7 @@ public class CallWebService implements Response.ErrorListener, Response.Listener
     public void onResponse(Object response) {
         MyApp.getInstance().getRequestQueue().getCache().invalidate(url, true);
         if (progressDialog != null)
-            showDialog();
+            hideDialog();
 
         if (response instanceof JSONObject) {
             onJsonObjectResponse((JSONObject) response);
@@ -106,10 +106,6 @@ public class CallWebService implements Response.ErrorListener, Response.Listener
             onJsonArrayResponse((JSONArray) response);
         }
 
-    }
-
-    private void showDialog() {
-        progressDialog.show();
     }
 
     private void onJsonObjectResponse(JSONObject response) {
@@ -137,6 +133,15 @@ public class CallWebService implements Response.ErrorListener, Response.Listener
     }
 
 
+    private void showDialog() {
+        progressDialog.show();
+    }
+    private void hideDialog() {
+        if(progressDialog!=null)
+        progressDialog.hide();
+    }
+
+
     public interface ObjectResponseCallBack {
 
         void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException;
@@ -156,7 +161,7 @@ public class CallWebService implements Response.ErrorListener, Response.Listener
     private void onError(String error) {
 
         if (progressDialog != null)
-            showDialog();
+            hideDialog();
         if (objectCallBackInterface != null)
             objectCallBackInterface.onFailure(error, apiCode);
     }

@@ -2,8 +2,9 @@
 <com.neopixl.pixlui.components.textview.TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:id="@+id/spinnerItemTV"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/eight_dp"
     android:text="@string/add_address"
     pixlui:typeface="Roboto-Regular.ttf">
 

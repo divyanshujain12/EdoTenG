@@ -19,4 +19,10 @@ public interface Constants {
     String IS_LOGGED_IN = "is_logged_in";
     String USER_ID = "user_id";
     String MESSAGE = "message";
+    String SEARCH_KEYWORDS = "searchkeywords";
+    String SEARCH_TYPE = "searchtype";
+    String C_BRAND_ID = "c_brand_id";
+    String CAT_ID = "cat_id";
+    String ORDER_BY = "orderby";
+    String PAGE_NUO = "page_no";
 }

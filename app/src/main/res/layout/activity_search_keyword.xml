@@ -8,15 +8,15 @@
 
     <include layout="@layout/custom_toolbar_with_white_title" />
 
-    <LinearLayout
+    <LinearLayout xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/fifteen_dp">
+        android:paddingBottom="@dimen/fifteen_dp"
+        android:paddingEnd="@dimen/fifteen_dp"
+        android:paddingStart="@dimen/fifteen_dp">
 
         <include layout="@layout/search_keyword_view" />
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,12 +24,21 @@
             android:layout_marginTop="@dimen/five_dp"
             android:orientation="horizontal">
 
-           <!-- <include layout="@layout/type_view" />-->
-
             <include layout="@layout/brand_view" />
 
         </LinearLayout>
         <include layout="@layout/search_keyword_strip_view" />
+
+        <com.neopixl.pixlui.components.button.Button
+            android:id="@+id/searchBT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:background="@drawable/rounded_corner_orange_filled"
+            android:text="@string/search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sixteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
     </LinearLayout>
 
     <include layout="@layout/search_result_view" />
