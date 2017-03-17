@@ -23,6 +23,7 @@ import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.Models.BrandsModel;
+import com.example.divyanshujain.edoteng.Models.ProductModel;
 import com.example.divyanshujain.edoteng.Models.ValidationModel;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
@@ -79,15 +80,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     @InjectView(R.id.searchBT)
     Button searchBT;
     private TextView selectedTV;
-    /* private static String ADD_DATE_DESC = "add_date___DESC";
-     private static String VIEWS_DESC = "views___DESC";
-     private static String RATING_DESC = "rating___DESC";
-     private static String ADD_DATE_ASC = "add_date___ASC";
-     private static String PRODUCT_NAME_ASC = "product_name___ASC";
-     private static String PRODUCT_NAME_DESC = "product_name___DESC";
-     private static String DOWNLOADABLE_PRICE_ASC = "downloadable_price___ASC";
-     private static String DOWNLOADABLE_PRICE_DESC = "downloadable_price___DESC";
- */
+   private ArrayList<ProductModel> productModels;
     private static String ALL = "All";
     private static String MATERIAL = "Materials";
     private static String TEST_SERIES = "Test Series";
@@ -146,6 +139,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
                 brandSP.setOnItemSelectedListener(this);
                 break;
             case ApiCodes.SEARCH:
+                productModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA),ProductModel.class);
                 break;
         }
     }

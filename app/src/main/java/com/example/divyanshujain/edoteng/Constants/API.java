@@ -12,5 +12,5 @@ public interface API {
     String FORGOT_PASSWORD = BASE + "forgetpassword";
     String CHANGE_PASSWORD = BASE + "changepassword";
     String GET_BRANDS = BASE + "getAllBrands";
-    String PRODUCT_LISTING_FILER = BASE+"productListingFilter";
+    String PRODUCT_LISTING_FILER = BASE + "categoryWiseFilter";
 }
