@@ -139,7 +139,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
                 brandSP.setOnItemSelectedListener(this);
                 break;
             case ApiCodes.SEARCH:
-                productModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA),ProductModel.class);
+                productModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONObject(Constants.DATA).getJSONArray(Constants.LISTING),ProductModel.class);
                 break;
         }
     }

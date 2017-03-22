@@ -16,6 +16,7 @@ public interface Constants {
     String PHONE_NUMBER = "phone";
     String DATE_OF_BIRTH = "date_of_birth";
     String DATA = "data";
+    String LISTING = "listing";
     String IS_LOGGED_IN = "is_logged_in";
     String USER_ID = "user_id";
     String MESSAGE = "message";
