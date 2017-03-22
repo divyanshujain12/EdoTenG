@@ -26,4 +26,5 @@ public interface Constants {
     String CAT_ID = "cat_id";
     String ORDER_BY = "orderby";
     String PAGE_NUO = "page_no";
+    String MOD_URL = "mod_url";
 }

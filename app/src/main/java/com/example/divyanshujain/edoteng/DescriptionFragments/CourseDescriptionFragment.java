@@ -7,9 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.divyanshujain.edoteng.Constants.API;
+import com.example.divyanshujain.edoteng.Constants.ApiCodes;
+import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseFragment;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.neopixl.pixlui.components.textview.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -38,6 +45,16 @@ public class CourseDescriptionFragment extends BaseFragment {
     @InjectView(R.id.addToCartTV)
     TextView addToCartTV;
 
+    private String modUrl = "";
+
+    public static CourseDescriptionFragment getInstance(String modUrl) {
+        CourseDescriptionFragment courseDescriptionFragment = new CourseDescriptionFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.MOD_URL, modUrl);
+        courseDescriptionFragment.setArguments(bundle);
+        return courseDescriptionFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.course_description_fragment, container, false);
@@ -60,6 +77,23 @@ public class CourseDescriptionFragment extends BaseFragment {
     }
 
     private void initViews() {
+        modUrl = getArguments().getString(Constants.MOD_URL);
+        CallWebService.getInstance(getContext(),true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL,createJsonForGetProductDetail(),this);
+    }
+
+    private JSONObject createJsonForGetProductDetail() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.MOD_URL,modUrl);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    @Override
+    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
+        super.onJsonObjectSuccess(response, apiType);
 
     }
 

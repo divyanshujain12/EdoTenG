@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.DescriptionFragments.CourseDescriptionFragment;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.R;
@@ -45,7 +46,7 @@ public class DescriptionActivity extends BaseActivity {
     private void initViews() {
         fragmentManager = getSupportFragmentManager();
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.desc));
-        updateFragment(new CourseDescriptionFragment());
+        updateFragment(CourseDescriptionFragment.getInstance(getIntent().getStringExtra(Constants.MOD_URL)));
     }
 
     public void updateFragment(Fragment fragment) {

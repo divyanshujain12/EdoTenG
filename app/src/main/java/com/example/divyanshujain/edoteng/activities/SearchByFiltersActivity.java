@@ -14,6 +14,7 @@ import android.widget.Spinner;
 
 import com.example.divyanshujain.edoteng.Adapters.SearchAdapter;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
+import com.example.divyanshujain.edoteng.Models.ProductModel;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.textview.TextView;
@@ -55,7 +56,7 @@ public class SearchByFiltersActivity extends BaseActivity {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.search_with_filters));
 
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
-        searchAdapter = new SearchAdapter(this, new ArrayList<String>(), this);
+        searchAdapter = new SearchAdapter(this, new ArrayList<ProductModel>(), this);
         searchedKeywordRV.setAdapter(searchAdapter);
     }
 

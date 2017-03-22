@@ -34,8 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:alpha=".7"
             android:layout_marginTop="@dimen/two_dp"
+            android:alpha=".7"
+            android:maxLines="3"
             android:text="@string/dummy_desc"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/fourteen_sp"
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content">
 
             <com.neopixl.pixlui.components.textview.TextView
-                android:id="@+id/productPurchaseTypeTV"
+                android:id="@+id/itemTypeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

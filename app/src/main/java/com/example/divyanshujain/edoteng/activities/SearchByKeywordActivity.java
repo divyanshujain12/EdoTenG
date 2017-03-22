@@ -80,7 +80,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     @InjectView(R.id.searchBT)
     Button searchBT;
     private TextView selectedTV;
-   private ArrayList<ProductModel> productModels;
+    private ArrayList<ProductModel> productModels;
     private static String ALL = "All";
     private static String MATERIAL = "Materials";
     private static String TEST_SERIES = "Test Series";
@@ -92,6 +92,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     HashMap<View, String> hashMap;
     private String selectedBrandID = "", selectedOrderBy = "";
     ArrayList<BrandsModel> brandsModels;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,14 +103,15 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     }
 
     private void InitViews() {
-        setInitialValues();
-        createSortByMap();
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.search_with_keyword));
+        setInitialValues();
         validation = new Validation();
+        sortingKeyArray = getResources().getStringArray(R.array.sorting_array);
+        sortingValueArray = getResources().getStringArray(R.array.sorting_value_array);
         validation.addValidationField(new ValidationModel(searchET, Validation.TYPE_EMPTY_FIELD_VALIDATION, getString(R.string.err_msg_search)));
         searchKeyTV.setTextColor(Color.WHITE);
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
-        searchAdapter = new SearchAdapter(this, new ArrayList<String>(), this);
+        searchAdapter = new SearchAdapter(this, new ArrayList<ProductModel>(), this);
         searchedKeywordRV.setAdapter(searchAdapter);
         CallWebService.getInstance(this, false, ApiCodes.GET_BRANDS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_BRANDS, null, this);
         filterSP.setOnItemSelectedListener(this);
@@ -125,6 +127,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     public void onClickItem(int position, View view) {
         super.onClickItem(position, view);
         Intent intent = new Intent(this, DescriptionActivity.class);
+        intent.putExtra(Constants.MOD_URL, productModels.get(position).getMod_url());
         startActivity(intent);
     }
 
@@ -139,7 +142,8 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
                 brandSP.setOnItemSelectedListener(this);
                 break;
             case ApiCodes.SEARCH:
-                productModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONObject(Constants.DATA).getJSONArray(Constants.LISTING),ProductModel.class);
+                productModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONObject(Constants.DATA).getJSONArray(Constants.LISTING), ProductModel.class);
+                searchAdapter.addItems(productModels);
                 break;
         }
     }
@@ -152,6 +156,10 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     }
 
 
+    private void createSortByMap() {
+
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = null;
         switch (item.getItemId()) {
@@ -160,11 +168,6 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
                 break;
         }
         return true;
-    }
-
-    private void createSortByMap() {
-        sortingKeyArray = getResources().getStringArray(R.array.sorting_array);
-        sortingValueArray = getResources().getStringArray(R.array.sorting_value_array);
     }
 
     @OnClick({R.id.allTV, R.id.materialTV, R.id.testSeriesTV, R.id.videosTV})

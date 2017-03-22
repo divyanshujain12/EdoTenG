@@ -13,4 +13,5 @@ public interface API {
     String CHANGE_PASSWORD = BASE + "changepassword";
     String GET_BRANDS = BASE + "getAllBrands";
     String PRODUCT_LISTING_FILER = BASE + "categoryWiseFilter";
+    String GET_PRODUCT_DETAIL = BASE + "getProductDetail";
 }

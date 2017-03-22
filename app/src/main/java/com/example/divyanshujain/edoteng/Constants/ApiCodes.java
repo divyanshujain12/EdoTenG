@@ -13,4 +13,5 @@ public interface ApiCodes {
     int CHANGE_PASSWORD = 104;
     int GET_BRANDS = 105;
     int SEARCH = 106;
+    int GET_PRODUCT_DETAIL = 107;
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements AdapterView.OnItemSelectedListener{
 
     @InjectView(R.id.categorySP)
     Spinner categorySP;
@@ -49,6 +50,8 @@ public class HomeActivity extends BaseActivity {
 
     private void initViews() {
         CommonFunctions.getInstance().configureToolbarWithOutBackButton(this, toolbarView, getString(R.string.home));
+        categorySP.setOnItemSelectedListener(this);
+        subCategorySP.setOnItemSelectedListener(this);
     }
 
     @OnClick({R.id.goBT, R.id.searchET})
@@ -83,5 +86,15 @@ public class HomeActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         searchET.setFocusable(false);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
