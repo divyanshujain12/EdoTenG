@@ -87,5 +87,8 @@
     <string name="password_reset">Password Reset</string>
     <string name="update_address">Update Address</string>
     <string name="err_msg_search">Search Field Cant Left Blank!</string>
+    <string name="rs">RS-</string>
+    <string name="file_type">File Type-</string>
+    <string name="no_data_available">No Data Available!</string>
 
 </resources>

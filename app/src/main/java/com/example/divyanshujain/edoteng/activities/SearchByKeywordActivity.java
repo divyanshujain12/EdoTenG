@@ -58,14 +58,12 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     TextView testSeriesTV;
     @InjectView(R.id.videosTV)
     TextView videosTV;
-
     @InjectView(R.id.filterSP)
     Spinner filterSP;
     @InjectView(R.id.searchedKeywordRV)
     RecyclerView searchedKeywordRV;
     @InjectView(R.id.activity_search_keyword)
     LinearLayout activitySearchKeyword;
-
     SearchAdapter searchAdapter;
     @InjectView(R.id.toolbarView)
     Toolbar toolbarView;
@@ -75,10 +73,10 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     ImageView searchIV;
     @InjectView(R.id.brandSP)
     Spinner brandSP;
-
-    SpinnerAdapter spinnerAdapter;
     @InjectView(R.id.searchBT)
     Button searchBT;
+
+    SpinnerAdapter spinnerAdapter;
     private TextView selectedTV;
     private ArrayList<ProductModel> productModels;
     private static String ALL = "All";

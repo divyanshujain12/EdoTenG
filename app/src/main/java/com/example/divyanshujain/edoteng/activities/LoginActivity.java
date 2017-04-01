@@ -69,8 +69,8 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.signInBT:
-                // validateFields();
-                goToHome();
+                 validateFields();
+                //goToHome();
                 break;
             case R.id.signUpBT:
                 Intent intent = new Intent(this, SignUpActivity.class);

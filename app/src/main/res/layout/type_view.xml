@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="@string/type"
         android:textColor="@color/white"
-        android:textSize="@dimen/eighteen_sp" />
+        android:textSize="@dimen/sixteen_sp" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
             android:id="@+id/typeSP"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fourty_dp"
-            pixlui:typeface="Roboto-Medium.ttf" />
+            pixlui:typeface="Roboto-Medium.ttf"
+            android:entries="@array/type_array"/>
     </android.support.v7.widget.CardView>
 </LinearLayout>

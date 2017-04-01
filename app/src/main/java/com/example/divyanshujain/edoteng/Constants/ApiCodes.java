@@ -14,4 +14,8 @@ public interface ApiCodes {
     int GET_BRANDS = 105;
     int SEARCH = 106;
     int GET_PRODUCT_DETAIL = 107;
+    int DIGITAL_VER_REQUEST = 108;
+    int CATEGORIES = 109;
+    int SUB_CATEGORIES = 110;
+    int SUB_SUB_CATEGORIES = 111;
 }

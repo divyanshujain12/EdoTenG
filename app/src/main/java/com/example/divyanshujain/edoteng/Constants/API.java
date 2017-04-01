@@ -14,4 +14,7 @@ public interface API {
     String GET_BRANDS = BASE + "getAllBrands";
     String PRODUCT_LISTING_FILER = BASE + "categoryWiseFilter";
     String GET_PRODUCT_DETAIL = BASE + "getProductDetail";
+    String DIGITAL_VERSION_MAIL = BASE + "digitalVersionEmail";
+    String GET_ALL_CATEGORIES = BASE + "getAllCategoryDropdown";
+    String GET_SUB_AND_SUB_SUB_CAT = BASE + "getAllSubcategories";
 }

@@ -10,12 +10,24 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.divyanshujain.edoteng.Adapters.HomeSpinnerAdapter;
+import com.example.divyanshujain.edoteng.Constants.API;
+import com.example.divyanshujain.edoteng.Constants.ApiCodes;
+import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
+import com.example.divyanshujain.edoteng.Models.HomeSpinnerModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
+import com.example.divyanshujain.edoteng.Utils.UniversalParser;
 import com.neopixl.pixlui.components.button.Button;
 import com.neopixl.pixlui.components.edittext.EditText;
 import com.neopixl.pixlui.components.textview.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -40,6 +52,10 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
     @InjectView(R.id.searchKeyTV)
     TextView searchKeyTV;
 
+    private ArrayList<HomeSpinnerModel> categoryArray, subCategoryArray, subSubCategoryArray;
+    private HomeSpinnerAdapter categoryAdapter, subCategoryAdapter, subSubCategoryAdapter;
+    private String categoryName, subCategoryName, subSubCategoryName;
+    private String ID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,19 +68,53 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
         CommonFunctions.getInstance().configureToolbarWithOutBackButton(this, toolbarView, getString(R.string.home));
         categorySP.setOnItemSelectedListener(this);
         subCategorySP.setOnItemSelectedListener(this);
+        subSubCategorySP.setOnItemSelectedListener(this);
+
+        CallWebService.getInstance(this, true, ApiCodes.CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_CATEGORIES, null, this);
     }
 
     @OnClick({R.id.goBT, R.id.searchET})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.goBT:
-                startActivity(new Intent(this, SearchByFiltersActivity.class));
+                Intent intent = new Intent(this, SearchByFiltersActivity.class);
+                intent.putExtra(Constants.CATEGORY, categoryName);
+                intent.putExtra(Constants.SUB_CAT, subCategoryName);
+                intent.putExtra(Constants.SUB_SUB_CAT, subSubCategoryName);
+                intent.putExtra(Constants.ID, ID);
+                startActivity(intent);
                 break;
             case R.id.searchET:
                 startActivity(new Intent(this, SearchByKeywordActivity.class));
                 break;
         }
     }
+
+    @Override
+    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
+        super.onJsonObjectSuccess(response, apiType);
+
+        switch (apiType) {
+            case ApiCodes.CATEGORIES:
+                categoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
+                categoryAdapter = new HomeSpinnerAdapter(this, categoryArray);
+                categorySP.setAdapter(categoryAdapter);
+
+                break;
+            case ApiCodes.SUB_CATEGORIES:
+                subCategoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
+                subCategoryAdapter = new HomeSpinnerAdapter(this, subCategoryArray);
+                subCategorySP.setAdapter(subCategoryAdapter);
+                break;
+            case ApiCodes.SUB_SUB_CATEGORIES:
+                subSubCategoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
+                subSubCategoryAdapter = new HomeSpinnerAdapter(this, subSubCategoryArray);
+                subSubCategorySP.setAdapter(subSubCategoryAdapter);
+                break;
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -90,11 +140,37 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.categorySP:
+                CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(categoryArray.get(position).getId()), this);
+                categoryName = categoryArray.get(position).getName();
+                ID = categoryArray.get(position).getId();
+                break;
+            case R.id.subCategorySP:
+                CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(subCategoryArray.get(position).getId()), this);
+                subCategoryName = subCategoryArray.get(position).getName();
+                ID = subCategoryArray.get(position).getId();
+                break;
+            case R.id.subSubCategorySP:
+                subSubCategoryName = subSubCategoryArray.get(position).getName();
+                ID = subSubCategoryArray.get(position).getId();
+                break;
+        }
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private JSONObject createJsonForGetData(String id) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ID, id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 }

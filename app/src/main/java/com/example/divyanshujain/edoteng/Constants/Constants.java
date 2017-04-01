@@ -27,4 +27,12 @@ public interface Constants {
     String ORDER_BY = "orderby";
     String PAGE_NUO = "page_no";
     String MOD_URL = "mod_url";
+    String PRODUCT_DETAIL = "productDetails";
+    String R_ARRAY = "rArray";
+    String PRODUCT_REVIEW = "productReview";
+    String RANDOM = "random";
+    String ID = "id";
+    String CATEGORY = "category";
+    String SUB_CAT = "sub_cat";
+    String SUB_SUB_CAT = "sub_sub_cat";
 }

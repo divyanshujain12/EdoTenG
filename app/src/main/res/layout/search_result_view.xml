@@ -53,4 +53,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/ten_dp"
         android:layout_below="@+id/sortingByFL" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/noDataTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:text="@string/no_data_available"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/twenty_sp"
+        android:visibility="gone"
+        pixlui:typeface="Roboto-Medium.ttf" />
+
 </RelativeLayout>

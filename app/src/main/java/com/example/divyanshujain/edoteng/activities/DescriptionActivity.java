@@ -2,24 +2,37 @@ package com.example.divyanshujain.edoteng.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.divyanshujain.edoteng.Adapters.ViewPagerAdapter;
+import com.example.divyanshujain.edoteng.Constants.API;
+import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.DescriptionFragments.CourseDescriptionFragment;
+import com.example.divyanshujain.edoteng.DescriptionFragments.ReviewsFragment;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
+import com.example.divyanshujain.edoteng.Models.ProductDetailModel;
+import com.example.divyanshujain.edoteng.Models.ProductReviewUserModel;
+import com.example.divyanshujain.edoteng.Models.ReviewModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
+import com.example.divyanshujain.edoteng.Utils.NonSwipeableViewPager;
+import com.example.divyanshujain.edoteng.Utils.UniversalParser;
 import com.neopixl.pixlui.components.textview.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class DescriptionActivity extends BaseActivity {
 
@@ -29,11 +42,15 @@ public class DescriptionActivity extends BaseActivity {
     TextView descTV;
     @InjectView(R.id.reviewTV)
     TextView reviewTV;
-    @InjectView(R.id.fragmentsFL)
-    FrameLayout fragmentsFL;
+
+
+    @InjectView(R.id.productViewsVp)
+    NonSwipeableViewPager productViewsVp;
+
+    ViewPagerAdapter viewPagerAdapter;
     @InjectView(R.id.activity_description)
     LinearLayout activityDescription;
-    private FragmentManager fragmentManager;
+    private View lastSelectedView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +61,45 @@ public class DescriptionActivity extends BaseActivity {
     }
 
     private void initViews() {
-        fragmentManager = getSupportFragmentManager();
+
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.desc));
-        updateFragment(CourseDescriptionFragment.getInstance(getIntent().getStringExtra(Constants.MOD_URL)));
+        CallWebService.getInstance(this, true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL, createJsonForGetProductDetail(), this);
+        lastSelectedView = descTV;
+
     }
 
-    public void updateFragment(Fragment fragment) {
-        String name = fragment.getClass().getName();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        boolean isPopped = fragmentManager.popBackStackImmediate(name, 0);
-        if (!isPopped && fragmentManager.findFragmentByTag(name) == null) {
-            fragmentTransaction.replace(R.id.fragmentsFL, fragment);
-        }
-        fragmentTransaction.commit();
+    @Override
+    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
+        super.onJsonObjectSuccess(response, apiType);
+        ProductDetailModel productDetailModel = UniversalParser.getInstance().parseJsonObject(response.getJSONObject(Constants.DATA).getJSONObject(Constants.PRODUCT_DETAIL), ProductDetailModel.class);
+        ArrayList<ReviewModel> reviewModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONObject(Constants.DATA).getJSONArray(Constants.R_ARRAY), ReviewModel.class);
+        ArrayList<ProductReviewUserModel> productReviewUserModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONObject(Constants.DATA).getJSONArray(Constants.PRODUCT_REVIEW), ProductReviewUserModel.class);
+
+        productDetailModel.setrArray(reviewModels);
+        productDetailModel.setProductReview(productReviewUserModels);
+        setUpViewPager(productDetailModel);
+
     }
+
+    private void setUpViewPager(ProductDetailModel productDetailModel) {
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(CourseDescriptionFragment.getInstance(productDetailModel), "");
+        viewPagerAdapter.addFragment(ReviewsFragment.getInstance(productDetailModel), "");
+
+        productViewsVp.setAdapter(viewPagerAdapter);
+    }
+
+
+    private JSONObject createJsonForGetProductDetail() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.MOD_URL, getIntent().getStringExtra(Constants.MOD_URL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,6 +116,23 @@ public class DescriptionActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    @OnClick({R.id.descTV, R.id.reviewTV})
+    public void onClick(View view) {
+        if (lastSelectedView == view)
+            return;
+        switch (view.getId()) {
+            case R.id.descTV:
+                productViewsVp.setCurrentItem(0);
+                break;
+            case R.id.reviewTV:
+                productViewsVp.setCurrentItem(1);
+                break;
+        }
+        view.setBackgroundResource(R.drawable.rounded_top_corners_white);
+        lastSelectedView.setBackgroundResource(R.drawable.rounded_top_corners_light_grey);
+        lastSelectedView = view;
     }
 }
 

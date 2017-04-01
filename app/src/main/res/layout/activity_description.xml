@@ -12,7 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="2.5">
 
         <ImageView
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_top_corners_white"
             android:gravity="center"
-            android:padding="@dimen/ten_dp"
+            android:padding="@dimen/five_dp"
             android:text="@string/course_description"
             android:textSize="@dimen/sixteen_sp"
             pixlui:typeface="Roboto-Medium.ttf"/>
@@ -49,17 +49,17 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_top_corners_light_grey"
             android:gravity="center"
-            android:padding="@dimen/ten_dp"
+            android:padding="@dimen/five_dp"
             android:text="@string/review"
             android:textSize="@dimen/sixteen_sp"
             pixlui:typeface="Roboto-Medium.ttf"/>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/fragmentsFL"
+    <com.example.divyanshujain.edoteng.Utils.NonSwipeableViewPager
+        android:id="@+id/productViewsVp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="5.5"
         android:background="@color/white"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal" />
 </LinearLayout>

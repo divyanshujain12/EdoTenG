@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center"
+    android:orientation="horizontal"
+    tools:showIn="@layout/fragment_reviews">
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:textSize="@dimen/fifteen_sp" />
+
+    <ImageView
+        android:layout_width="@dimen/eight_dp"
+        android:layout_height="@dimen/eight_dp"
+        android:layout_marginLeft="@dimen/two_dp"
+        android:layout_marginStart="@dimen/two_dp"
+        android:src="@drawable/ic_star" />
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/fiveStarSB"
+        android:layout_width="@dimen/two_hundred_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/five_dp"
+        android:layout_marginStart="@dimen/five_dp"
+        android:thumb="@null" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/fiveStartReviewCountTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/five_dp"
+        android:layout_marginStart="@dimen/five_dp"
+        android:text="5"
+        android:textSize="@dimen/fifteen_sp" />
+</LinearLayout>

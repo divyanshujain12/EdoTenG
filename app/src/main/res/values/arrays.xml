@@ -22,4 +22,10 @@
         <item>downloadable_price___ASC</item>
         <item>downloadable_price___DESC</item>
     </string-array>
+    <string-array name="type_array">
+        <item>All</item>
+        <item>Materials</item>
+        <item>Test Series</item>
+        <item>Videos</item>
+    </string-array>
 </resources>

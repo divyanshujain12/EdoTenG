@@ -10,9 +10,15 @@ import android.widget.ImageView;
 import com.example.divyanshujain.edoteng.Constants.API;
 import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
+import com.example.divyanshujain.edoteng.CustomViews.CustomAlertDialogs;
+import com.example.divyanshujain.edoteng.CustomViews.CustomToasts;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseFragment;
+import com.example.divyanshujain.edoteng.Interfaces.SnackBarCallback;
+import com.example.divyanshujain.edoteng.Models.ProductDetailModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.AddToCartProducts;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
+import com.example.divyanshujain.edoteng.Utils.MySharedPereference;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import org.json.JSONException;
@@ -20,6 +26,7 @@ import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by divyanshu.jain on 12/21/2016.
@@ -44,13 +51,15 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView downloadDigitalTV;
     @InjectView(R.id.addToCartTV)
     TextView addToCartTV;
+    @InjectView(R.id.addToWishListTV)
+    TextView addToWishListTV;
 
-    private String modUrl = "";
+    private ProductDetailModel productDetailModel = null;
 
-    public static CourseDescriptionFragment getInstance(String modUrl) {
+    public static CourseDescriptionFragment getInstance(ProductDetailModel modUrl) {
         CourseDescriptionFragment courseDescriptionFragment = new CourseDescriptionFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.MOD_URL, modUrl);
+        bundle.putParcelable(Constants.DATA, modUrl);
         courseDescriptionFragment.setArguments(bundle);
         return courseDescriptionFragment;
     }
@@ -77,29 +86,65 @@ public class CourseDescriptionFragment extends BaseFragment {
     }
 
     private void initViews() {
-        modUrl = getArguments().getString(Constants.MOD_URL);
-        CallWebService.getInstance(getContext(),true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL,createJsonForGetProductDetail(),this);
-    }
-
-    private JSONObject createJsonForGetProductDetail() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put(Constants.MOD_URL,modUrl);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        productDetailModel = getArguments().getParcelable(Constants.DATA);
+        if (productDetailModel != null) {
+            physicalVersionPriceTV.setText(getString(R.string.rs) + productDetailModel.getPhysical_price());
+            digitalVersionPriceTV.setText(getString(R.string.rs) + productDetailModel.getDownloadable_price());
+            fileTypeTV.setText(getString(R.string.file_type) + productDetailModel.getItem_type());
+            productNameTV.setText(productDetailModel.getProduct_name());
+            sellerNameTV.setText(productDetailModel.getMetaTitle());
+            descriptionTV.setText(productDetailModel.getShort_description());
         }
-        return jsonObject;
-    }
-
-    @Override
-    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
-        super.onJsonObjectSuccess(response, apiType);
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @OnClick({R.id.downloadDigitalTV, R.id.addToCartTV})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.downloadDigitalTV:
+                if (productDetailModel.getCan_downloadable_purchase().equals("1")) {
+                    if (!productDetailModel.getDownloadable_price().equals("0")) {
+                        AddToCartProducts.getInstance().addProductToCart(productDetailModel);
+                    } else {
+                        CallWebService.getInstance(getContext(), true, ApiCodes.DIGITAL_VER_REQUEST).hitJsonObjectRequestAPI(CallWebService.POST, API.DIGITAL_VERSION_MAIL, createJsonForPostDigitalVersionRequest(), this);
+                    }
+                }
+                break;
+            case R.id.addToCartTV:
+                if (productDetailModel.getCan_physical_purchase().equals("1") && !productDetailModel.getPhysical_price().equals("0"))
+                    AddToCartProducts.getInstance().addProductToCart(productDetailModel);
+                else
+                    CustomToasts.getInstance(getContext()).showErrorToast("No For Purchase!");
+                break;
+        }
+    }
+
+    @Override
+    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
+        super.onJsonObjectSuccess(response, apiType);
+        CustomAlertDialogs.showAlertDialog(getContext(), "Congratulations!", response.getString(Constants.MESSAGE), new SnackBarCallback() {
+            @Override
+            public void doAction() {
+
+            }
+        });
+
+    }
+
+    private JSONObject createJsonForPostDigitalVersionRequest() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.USER_ID, MySharedPereference.getInstance().getString(getContext(), Constants.USER_ID));
+            jsonObject.put(Constants.RANDOM, productDetailModel.getRandom());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
     }
 }
