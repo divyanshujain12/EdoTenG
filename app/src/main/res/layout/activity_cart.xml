@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/cart_bottom_view" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/seventy_dp">
+        android:orientation="vertical">
 
         <include layout="@layout/custom_toolbar_with_orange_title" />
 
@@ -21,6 +22,4 @@
             android:layout_height="match_parent"
             android:padding="@dimen/five_dp" />
     </LinearLayout>
-
-    <include layout="@layout/cart_bottom_view" />
 </FrameLayout>

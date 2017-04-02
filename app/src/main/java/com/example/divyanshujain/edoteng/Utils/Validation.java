@@ -29,6 +29,11 @@ public class Validation {
     private TSnackbar snackbar;
     private ArrayList<ValidationModel> validationModels = new ArrayList<>();
 
+    public final static String ALL_FILED_MANDATORY = "All fields are mandatory";
+    public final static String USERNAME_EMPTY_FIELD_VALIDATION = "Name cant left blank";
+    public final static String EMAILNOT_VALID_FIELD_VALIDATION = "Email is not valid";
+    public final static String PHONE_VALID_FIELD_VALIDATION = "Phone Number is not valid";
+
     public void addValidationField(ValidationModel validationModel) {
         validationModels.add(validationModel);
     }

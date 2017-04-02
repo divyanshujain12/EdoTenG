@@ -51,6 +51,7 @@ public class ProductDetailModel implements Parcelable {
     private String live_video_url;
     private String title;
     private String timeline_url;
+    private int physicalPriceAdded = 0;
     private ArrayList<ReviewModel> rArray;
     private ArrayList<ProductReviewUserModel> productReview;
 
@@ -99,6 +100,7 @@ public class ProductDetailModel implements Parcelable {
         live_video_url = in.readString();
         title = in.readString();
         timeline_url = in.readString();
+        physicalPriceAdded = in.readInt();
         productReview = in.createTypedArrayList(ProductReviewUserModel.CREATOR);
         rArray = in.createTypedArrayList(ReviewModel.CREATOR);
     }
@@ -447,6 +449,14 @@ public class ProductDetailModel implements Parcelable {
         this.productReview = productReview;
     }
 
+    public int getPhysicalPriceAdded() {
+        return physicalPriceAdded;
+    }
+
+    public void setPhysicalPriceAdded(int physicalPriceAdded) {
+        this.physicalPriceAdded = physicalPriceAdded;
+    }
+
     public static final Creator<ProductDetailModel> CREATOR = new Creator<ProductDetailModel>() {
         @Override
         public ProductDetailModel createFromParcel(Parcel in) {
@@ -506,6 +516,7 @@ public class ProductDetailModel implements Parcelable {
         dest.writeString(live_class_url);
         dest.writeString(live_video_url);
         dest.writeString(title);
+        dest.writeInt(physicalPriceAdded);
         dest.writeString(timeline_url);
         dest.writeTypedList(productReview);
     }

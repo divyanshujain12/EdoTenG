@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/ten_dp"
         android:gravity="center_vertical"
-        android:text="@string/town_city"
+        android:text="@string/locality"
         android:textSize="@dimen/fifteen_sp"
         pixlui:typeface="Roboto-Regular.ttf" />
 
@@ -20,8 +20,8 @@
         android:layout_marginTop="@dimen/two_dp"
         card_view:cardElevation="@dimen/five_dp">
 
-        <Spinner
-            android:id="@+id/citySP"
+        <com.neopixl.pixlui.components.edittext.EditText
+            android:id="@+id/localityET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_top_corners_white"

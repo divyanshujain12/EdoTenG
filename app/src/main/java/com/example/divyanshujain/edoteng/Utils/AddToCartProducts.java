@@ -12,6 +12,7 @@ public class AddToCartProducts {
     private static final AddToCartProducts ourInstance = new AddToCartProducts();
 
     private ArrayList<ProductDetailModel> productDetailModels = new ArrayList<>();
+    private ProductDetailModel productDetailModel = new ProductDetailModel();
 
     public static AddToCartProducts getInstance() {
         return ourInstance;
@@ -31,5 +32,21 @@ public class AddToCartProducts {
 
     public void setProductDetailModels(ArrayList<ProductDetailModel> productDetailModels) {
         this.productDetailModels = productDetailModels;
+    }
+
+    public ProductDetailModel getProductDetailModel(int pos) {
+        return productDetailModels.get(pos);
+    }
+
+    public void removeProduct(int pos) {
+        productDetailModels.remove(pos);
+    }
+
+    public ProductDetailModel getProductDetailModel() {
+        return productDetailModel;
+    }
+
+    public void setProductDetailModel(ProductDetailModel productDetailModel) {
+        this.productDetailModel = productDetailModel;
     }
 }

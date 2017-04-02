@@ -27,6 +27,7 @@
             android:background="@drawable/rounded_top_corners_white"
             android:gravity="center_vertical"
             android:inputType="number"
+            android:maxLength="6"
             android:padding="@dimen/fifteen_dp"
             android:textSize="@dimen/sixteen_sp"
             pixlui:typeface="Roboto-Regular.ttf" />

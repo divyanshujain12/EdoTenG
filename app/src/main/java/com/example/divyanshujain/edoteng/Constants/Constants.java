@@ -35,4 +35,7 @@ public interface Constants {
     String CATEGORY = "category";
     String SUB_CAT = "sub_cat";
     String SUB_SUB_CAT = "sub_sub_cat";
+    String FROM_CART = "from_cart";
+    String STATE_ID = "state_id";
+    String COUNTRY_ID = "country_id";
 }

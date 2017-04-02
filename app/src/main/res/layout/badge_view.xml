@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cartRL"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true">
+
+
+    <ImageView
+        android:id="@+id/cartIV"
+      android:layout_height="@dimen/fifty_dp"
+        android:layout_width="@dimen/fifty_dp"
+        android:src="@drawable/ic_white_cart"
+        />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+        android:id="@+id/badgeTV"
+        android:layout_width="@dimen/thirty_dp"
+        android:layout_height="@dimen/thirty_dp"
+        android:background="@drawable/badge_circle"
+        android:gravity="center"
+        android:padding="@dimen/seven_dp"
+        android:text="10"
+        android:textColor="#FFF"
+        android:textSize="@dimen/ten_sp"
+        android:layout_gravity="right"
+        pixlui:typeface="Titillium-Regular.otf" />
+
+</FrameLayout>

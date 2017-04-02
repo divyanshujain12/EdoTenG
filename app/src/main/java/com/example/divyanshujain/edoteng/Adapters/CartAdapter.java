@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.divyanshujain.edoteng.Interfaces.RecyclerViewClick;
+import com.example.divyanshujain.edoteng.Models.ProductDetailModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.AddToCartProducts;
+import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import java.util.ArrayList;
@@ -20,12 +23,12 @@ import java.util.ArrayList;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList<String> arrayList;
+    private ArrayList<ProductDetailModel> productDetailModels;
     private RecyclerViewClick recyclerViewClick;
 
-    public CartAdapter(Context context, ArrayList<String> arrayList, RecyclerViewClick recyclerViewClick) {
+    public CartAdapter(Context context, RecyclerViewClick recyclerViewClick) {
         this.recyclerViewClick = recyclerViewClick;
-        this.arrayList = arrayList;
+        this.productDetailModels = AddToCartProducts.getInstance().getProductDetailModels();
         this.context = context;
     }
 
@@ -40,18 +43,39 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
+        ProductDetailModel productDetailModel = productDetailModels.get(position);
+        holder.itemNameTV.setText(productDetailModel.getTitle());
+
+        CommonFunctions.setItemTypeIV(productDetailModel.getItem_type(), holder.itemIV);
+
+        if (productDetailModel.getPhysicalPriceAdded() == 1)
+            holder.itemPriceTV.setText(productDetailModel.getPhysical_price());
+        else
+            holder.itemPriceTV.setText(productDetailModel.getDownloadable_price());
+
+        holder.detailTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewClick.onClickItem(holder.getAdapterPosition(), v);
+            }
+        });
+        holder.removeTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewClick.onClickItem(holder.getAdapterPosition(), v);
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recyclerViewClick.onClickItem(holder.getAdapterPosition(), view);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return productDetailModels.size();
     }
 
     protected class MyViewHolder extends RecyclerView.ViewHolder {

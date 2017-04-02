@@ -78,7 +78,7 @@
                     android:layout_marginTop="@dimen/five_dp"
                     android:alpha=".8"
                     android:padding="@dimen/ten_dp"
-
+                    android:visibility="gone"
                     android:text="@string/add_to_wishlist"
                     android:textColor="@color/button_color"
                     android:textSize="@dimen/twelve_sp"

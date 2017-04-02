@@ -7,15 +7,17 @@
         <item name="android:textColorSecondary">@color/button_color</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_orange_back</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">@dimen/fifteen_sp</item>
+        <item name="android:textSize">@dimen/twelve_sp</item>
     </style>
-
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="CustomToolbarWhite" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="actionMenuTextColor">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_white_back</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">@dimen/fifteen_sp</item>
+        <item name="android:textSize">@dimen/twelve_sp</item>
     </style>
 </resources>

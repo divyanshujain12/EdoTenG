@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/ten_dp"
-    tools:showIn="@layout/activity_add_shipping_address">
+    android:padding="@dimen/ten_dp">
 
     <include layout="@layout/full_name_view" />
 
     <include layout="@layout/phone_number_view" />
 
-    <include layout="@layout/pin_code_view" />
-
     <include layout="@layout/flat_number_view" />
 
-    <include layout="@layout/landmark_view" />
+    <include layout="@layout/locality_view" />
+
+    <include layout="@layout/pin_code_view" />
 
     <include layout="@layout/town_view" />
+
+    <include layout="@layout/state_view" />
+
+    <include layout="@layout/country_view" />
 </LinearLayout>

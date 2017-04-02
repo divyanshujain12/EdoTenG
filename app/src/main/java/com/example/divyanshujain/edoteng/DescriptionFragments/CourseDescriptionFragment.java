@@ -109,7 +109,7 @@ public class CourseDescriptionFragment extends BaseFragment {
             case R.id.downloadDigitalTV:
                 if (productDetailModel.getCan_downloadable_purchase().equals("1")) {
                     if (!productDetailModel.getDownloadable_price().equals("0")) {
-                        AddToCartProducts.getInstance().addProductToCart(productDetailModel);
+                        addProductToCart();
                     } else {
                         CallWebService.getInstance(getContext(), true, ApiCodes.DIGITAL_VER_REQUEST).hitJsonObjectRequestAPI(CallWebService.POST, API.DIGITAL_VERSION_MAIL, createJsonForPostDigitalVersionRequest(), this);
                     }
@@ -117,11 +117,16 @@ public class CourseDescriptionFragment extends BaseFragment {
                 break;
             case R.id.addToCartTV:
                 if (productDetailModel.getCan_physical_purchase().equals("1") && !productDetailModel.getPhysical_price().equals("0"))
-                    AddToCartProducts.getInstance().addProductToCart(productDetailModel);
+                    addProductToCart();
                 else
                     CustomToasts.getInstance(getContext()).showErrorToast("No For Purchase!");
                 break;
         }
+    }
+
+    private void addProductToCart() {
+        AddToCartProducts.getInstance().addProductToCart(productDetailModel);
+        CustomToasts.getInstance(getContext()).showSuccessToast("Product Added Successfully!");
     }
 
     @Override

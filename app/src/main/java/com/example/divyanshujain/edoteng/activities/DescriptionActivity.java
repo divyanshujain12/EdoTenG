@@ -63,7 +63,7 @@ public class DescriptionActivity extends BaseActivity {
     private void initViews() {
 
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.desc));
-        CallWebService.getInstance(this, true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL, createJsonForGetProductDetail(), this);
+
         lastSelectedView = descTV;
 
     }
@@ -133,6 +133,16 @@ public class DescriptionActivity extends BaseActivity {
         view.setBackgroundResource(R.drawable.rounded_top_corners_white);
         lastSelectedView.setBackgroundResource(R.drawable.rounded_top_corners_light_grey);
         lastSelectedView = view;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       /* if (getIntent().getIntExtra(Constants.FROM_CART, 0) == 1) {
+            setUpViewPager((ProductDetailModel) getIntent().getParcelableExtra(Constants.DATA));
+        } else {*/
+            CallWebService.getInstance(this, true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL, createJsonForGetProductDetail(), this);
+//        }
     }
 }
 

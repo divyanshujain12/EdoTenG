@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.example.divyanshujain.edoteng.Interfaces.RecyclerViewClick;
 import com.example.divyanshujain.edoteng.Models.ProductModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         holder.titleTV.setText(productModel.getProduct_name());
         holder.itemTypeTV.setText(productModel.getItem_type());
         holder.descTV.setText(Html.fromHtml(productModel.getShort_description()));
-        setItemTypeIV(productModel.getItem_type(), holder.categoryIconIV);
+        CommonFunctions.setItemTypeIV(productModel.getItem_type(), holder.categoryIconIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,22 +79,5 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         notifyDataSetChanged();
     }
 
-    private void setItemTypeIV(String type, ImageView imageView) {
-        switch (type) {
-            case "pdf":
-                imageView.setImageResource(R.drawable.ic_type_pdf);
-                break;
-            case "audio":
-                imageView.setImageResource(R.drawable.ic_type_audio);
-                break;
-            case "video":
-                imageView.setImageResource(R.drawable.ic_type_video);
-                break;
-            case "zip":
-                imageView.setImageResource(R.drawable.ic_zip);
-                break;
-
-        }
-    }
 
 }

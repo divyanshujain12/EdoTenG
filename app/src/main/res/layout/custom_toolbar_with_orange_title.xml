@@ -12,4 +12,5 @@
     app:subtitleTextColor="@color/colorPrimary"
     app:theme="@style/CustomToolbarOrange"
     app:title="@string/app_name"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
     app:titleTextColor="@color/button_color" />

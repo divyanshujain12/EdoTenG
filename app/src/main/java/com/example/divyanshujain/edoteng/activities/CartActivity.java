@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.divyanshujain.edoteng.Adapters.CartAdapter;
+import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.AddToCartProducts;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.textview.TextView;
-
-import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -53,8 +53,26 @@ public class CartActivity extends BaseActivity {
     private void initViews() {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.cart));
         productRV.setLayoutManager(new LinearLayoutManager(this));
-        cartAdapter = new CartAdapter(this, new ArrayList<String>(), this);
+        cartAdapter = new CartAdapter(this, this);
         productRV.setAdapter(cartAdapter);
+    }
+
+    @Override
+    public void onClickItem(int position, View view) {
+        super.onClickItem(position, view);
+        switch (view.getId()) {
+            case R.id.detailTV:
+                Intent intent = new Intent(this, DescriptionActivity.class);
+                //  AddToCartProducts.getInstance().setProductDetailModel(AddToCartProducts.getInstance().getProductDetailModel(position));
+                //intent.putExtra(Constants.DATA, AddToCartProducts.getInstance().getProductDetailModel(position));
+                intent.putExtra(Constants.MOD_URL, AddToCartProducts.getInstance().getProductDetailModel(position).getMod_url());
+                startActivity(intent);
+                break;
+            case R.id.removeTV:
+                AddToCartProducts.getInstance().removeProduct(position);
+                cartAdapter.notifyDataSetChanged();
+                break;
+        }
     }
 
     @Override

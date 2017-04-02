@@ -18,4 +18,7 @@ public interface ApiCodes {
     int CATEGORIES = 109;
     int SUB_CATEGORIES = 110;
     int SUB_SUB_CATEGORIES = 111;
+    int GET_COUNTRY = 112;
+    int GET_STATE = 113;
+    int GET_CITY = 114;
 }

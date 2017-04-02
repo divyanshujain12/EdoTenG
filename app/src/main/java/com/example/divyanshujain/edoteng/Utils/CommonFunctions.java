@@ -1,14 +1,12 @@
 package com.example.divyanshujain.edoteng.Utils;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
-import com.androidadvance.topsnackbar.TSnackbar;
+import com.example.divyanshujain.edoteng.R;
 
 /**
  * Created by divyanshu.jain on 11/30/2016.
@@ -49,4 +47,21 @@ public class CommonFunctions {
         });
     }
 
+    public static void setItemTypeIV(String type, ImageView imageView) {
+        switch (type) {
+            case "pdf":
+                imageView.setImageResource(R.drawable.ic_type_pdf);
+                break;
+            case "audio":
+                imageView.setImageResource(R.drawable.ic_type_audio);
+                break;
+            case "video":
+                imageView.setImageResource(R.drawable.ic_type_video);
+                break;
+            case "zip":
+                imageView.setImageResource(R.drawable.ic_zip);
+                break;
+
+        }
+    }
 }

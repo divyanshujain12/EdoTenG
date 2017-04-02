@@ -17,4 +17,7 @@ public interface API {
     String DIGITAL_VERSION_MAIL = BASE + "digitalVersionEmail";
     String GET_ALL_CATEGORIES = BASE + "getAllCategoryDropdown";
     String GET_SUB_AND_SUB_SUB_CAT = BASE + "getAllSubcategories";
+    String GET_ALL_COUNTRIES = BASE + "getAllCountries";
+    String GET_ALL_STATE = BASE + "getStateByCountry";
+    String GET_ALL_CITY = BASE + "getCityStateWise";
 }
