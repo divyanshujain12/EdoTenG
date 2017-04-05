@@ -22,4 +22,5 @@ public interface ApiCodes {
     int GET_STATE = 113;
     int GET_CITY = 114;
     int GET_ADDRESS = 115;
+    int UPDATE_SHIPPING_ADDRESS = 116;
 }

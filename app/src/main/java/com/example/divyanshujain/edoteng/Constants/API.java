@@ -21,4 +21,6 @@ public interface API {
     String GET_ALL_STATE = BASE + "getStateByCountry";
     String GET_ALL_CITY = BASE + "getCityStateWise";
     String GET_ADDRESS = BASE + "getShippingAddress";
+    String UPDATE_SHIPPING_ADDRESS = BASE + "updateShippingAddress";
+
 }

@@ -81,7 +81,7 @@ public class ShippingAddressesActivity extends BaseActivity {
 
     private void initViews() {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.ship_addresses));
-        CallWebService.getInstance(this, true, ApiCodes.GET_ADDRESS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ADDRESS, createJsonForGetAddress(), this);
+
 
     }
 
@@ -142,6 +142,12 @@ public class ShippingAddressesActivity extends BaseActivity {
         stateModel.setState_id(addressModel.getState());
         cityModel.setCity_id(addressModel.getCity());
         CallWebService.getInstance(this, true, ApiCodes.GET_COUNTRY).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_COUNTRIES, null, this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CallWebService.getInstance(this, true, ApiCodes.GET_ADDRESS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ADDRESS, createJsonForGetAddress(), this);
     }
 
     private JSONObject createJsonForGetAddress() {

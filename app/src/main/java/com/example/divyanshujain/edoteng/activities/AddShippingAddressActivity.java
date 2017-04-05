@@ -11,10 +11,14 @@ import android.widget.Spinner;
 import com.example.divyanshujain.edoteng.Adapters.CityAdapter;
 import com.example.divyanshujain.edoteng.Adapters.CountryAdapter;
 import com.example.divyanshujain.edoteng.Adapters.StateAdapter;
+import com.example.divyanshujain.edoteng.Constants.API;
+import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
+import com.example.divyanshujain.edoteng.CustomViews.CustomToasts;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.Models.ValidationModel;
 import com.example.divyanshujain.edoteng.R;
+import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.example.divyanshujain.edoteng.Utils.ProductsSingleton;
 import com.example.divyanshujain.edoteng.Utils.Validation;
@@ -23,6 +27,8 @@ import com.neopixl.pixlui.components.textview.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -67,9 +73,10 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
     StateAdapter stateAdapter;
     CountryAdapter countryAdapter;
 
-    private String selectedCityName, selectedStateName, selectedCountryName;
+    private String selectedCityID, selectedStateID, selectedCountryID;
 
     private Validation validation;
+    private HashMap<View, String> hashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +107,8 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
 
         fullNameET.setText(ProductsSingleton.getInstance().addressModel.getName());
         phoneNumberET.setText(ProductsSingleton.getInstance().addressModel.getPhone());
+        pinCodeET.setText(ProductsSingleton.getInstance().addressModel.getPin());
+        flatNumberET.setText(ProductsSingleton.getInstance().addressModel.getAddress1());
 
         citySP.setOnItemSelectedListener(this);
         stateSP.setOnItemSelectedListener(this);
@@ -115,9 +124,34 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.saveAddressTV:
-                startActivity(new Intent(this, ShippingAddressesActivity.class));
+                hashMap = validation.validate(this);
+                if (hashMap != null) {
+                    CallWebService.getInstance(this, true, ApiCodes.UPDATE_SHIPPING_ADDRESS).hitJsonObjectRequestAPI(CallWebService.POST, API.UPDATE_SHIPPING_ADDRESS, createJsonForUpdateAddress(), this);
+                }
+
                 break;
             case R.id.proceedToPaymentTV:
+                break;
+        }
+    }
+
+    @Override
+    public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
+        super.onJsonObjectSuccess(response, apiType);
+        switch (apiType) {
+            case ApiCodes.UPDATE_SHIPPING_ADDRESS:
+                CustomToasts.getInstance(this).showSuccessToast(response.getString(Constants.MESSAGE));
+                startActivity(new Intent(this, ShippingAddressesActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    public void onFailure(String str, int apiType) {
+        super.onFailure(str, apiType);
+        switch (apiType) {
+            case ApiCodes.UPDATE_SHIPPING_ADDRESS:
+                CustomToasts.getInstance(this).showErrorToast(str);
                 break;
         }
     }
@@ -149,13 +183,13 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.citySP:
-                selectedCityName = ProductsSingleton.getInstance().cityModels.get(position).getName();
+                selectedCityID = ProductsSingleton.getInstance().cityModels.get(position).getCity_id();
                 break;
             case R.id.stateSP:
-                selectedStateName = ProductsSingleton.getInstance().stateModels.get(position).getName();
+                selectedStateID = ProductsSingleton.getInstance().stateModels.get(position).getState_id();
                 break;
             case R.id.countrySP:
-                selectedCountryName = ProductsSingleton.getInstance().countryModels.get(position).getName();
+                selectedCountryID = ProductsSingleton.getInstance().countryModels.get(position).getCountry_id();
                 break;
         }
     }
@@ -180,6 +214,23 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(Constants.STATE_ID, stateID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    private JSONObject createJsonForUpdateAddress() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.NAME, hashMap.get(fullNameET));
+            jsonObject.put(Constants.ADDRESS_ONE, hashMap.get(flatNumberET));
+            jsonObject.put(Constants.ADDRESS_TWO, hashMap.get(localityET));
+            jsonObject.put(Constants.PIN, hashMap.get(pinCodeET));
+            jsonObject.put(Constants.PHONE, hashMap.get(phoneNumberET));
+            jsonObject.put(Constants.CITY, selectedCityID);
+            jsonObject.put(Constants.STATE, selectedStateID);
+            jsonObject.put(Constants.COUNTRY, selectedCountryID);
         } catch (JSONException e) {
             e.printStackTrace();
         }

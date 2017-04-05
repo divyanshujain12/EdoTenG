@@ -38,4 +38,11 @@ public interface Constants {
     String FROM_CART = "from_cart";
     String STATE_ID = "state_id";
     String COUNTRY_ID = "country_id";
+    String ADDRESS_ONE = "address1";
+    String ADDRESS_TWO = "address2";
+    String PIN = "pin";
+    String CITY = "city";
+    String STATE = "state";
+    String COUNTRY = "country";
+    String PHONE = "phone";
 }
