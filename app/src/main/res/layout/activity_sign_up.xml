@@ -8,13 +8,15 @@
 
     <include layout="@layout/custom_toolbar_with_orange_title" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/signUpBT"
+            android:layout_marginBottom="@dimen/ten_dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,8 +28,8 @@
                 <com.neopixl.pixlui.components.textview.TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address Detail"
                     android:layout_marginLeft="@dimen/five_dp"
+                    android:text="Address Detail"
                     android:textSize="@dimen/twenty_dp" />
 
                 <include layout="@layout/shipping_address_view" />
@@ -39,6 +41,7 @@
             android:id="@+id/signUpBT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/five_dp"
             android:background="@drawable/rounded_corner_orange_filled"
@@ -46,5 +49,5 @@
             android:textColor="@color/white"
             android:textSize="@dimen/eighteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />
-    </FrameLayout>
+    </RelativeLayout>
 </LinearLayout>

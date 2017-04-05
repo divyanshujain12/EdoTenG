@@ -21,4 +21,5 @@ public interface ApiCodes {
     int GET_COUNTRY = 112;
     int GET_STATE = 113;
     int GET_CITY = 114;
+    int GET_ADDRESS = 115;
 }

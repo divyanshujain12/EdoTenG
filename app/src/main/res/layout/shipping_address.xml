@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/ten_dp"
@@ -36,20 +36,11 @@
         pixlui:typeface="Roboto-Regular.ttf" />
 
     <com.neopixl.pixlui.components.textview.TextView
-        android:id="@+id/flatNumberTV"
+        android:id="@+id/addressTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/two_dp"
         android:text="@string/flat_house_number_floor_building"
-        android:textSize="@dimen/sixteen_sp"
-        pixlui:typeface="Roboto-Regular.ttf" />
-
-    <com.neopixl.pixlui.components.textview.TextView
-        android:id="@+id/landmarkTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/two_dp"
-        android:text="@string/landmark"
         android:textSize="@dimen/sixteen_sp"
         pixlui:typeface="Roboto-Regular.ttf" />
 
@@ -61,4 +52,23 @@
         android:text="@string/town_city"
         android:textSize="@dimen/sixteen_sp"
         pixlui:typeface="Roboto-Regular.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/stateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/two_dp"
+        android:text="@string/state"
+        android:textSize="@dimen/sixteen_sp"
+        pixlui:typeface="Roboto-Regular.ttf" />
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/countryTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/two_dp"
+        android:text="@string/country"
+        android:textSize="@dimen/sixteen_sp"
+        pixlui:typeface="Roboto-Regular.ttf" />
+
 </LinearLayout>

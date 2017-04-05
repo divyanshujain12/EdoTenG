@@ -3,18 +3,27 @@ package com.example.divyanshujain.edoteng.activities;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
+import com.example.divyanshujain.edoteng.Adapters.CityAdapter;
+import com.example.divyanshujain.edoteng.Adapters.CountryAdapter;
+import com.example.divyanshujain.edoteng.Adapters.StateAdapter;
 import com.example.divyanshujain.edoteng.Constants.API;
 import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
 import com.example.divyanshujain.edoteng.CustomViews.CustomAlertDialogs;
 import com.example.divyanshujain.edoteng.CustomViews.CustomTopSnackbars;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
+import com.example.divyanshujain.edoteng.Models.CityModel;
+import com.example.divyanshujain.edoteng.Models.CountryModel;
+import com.example.divyanshujain.edoteng.Models.StateModel;
 import com.example.divyanshujain.edoteng.Models.ValidationModel;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
+import com.example.divyanshujain.edoteng.Utils.UniversalParser;
 import com.example.divyanshujain.edoteng.Utils.Validation;
 import com.neopixl.pixlui.components.button.Button;
 import com.neopixl.pixlui.components.edittext.EditText;
@@ -22,13 +31,14 @@ import com.neopixl.pixlui.components.edittext.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class SignUpActivity extends BaseActivity {
+public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
     @InjectView(R.id.toolbarView)
     Toolbar toolbarView;
     @InjectView(R.id.usernameET)
@@ -53,13 +63,32 @@ public class SignUpActivity extends BaseActivity {
     EditText pinCodeET;
     @InjectView(R.id.flatNumberET)
     EditText flatNumberET;
-    @InjectView(R.id.landMarkET)
+    @InjectView(R.id.localityET)
+    EditText localityET;
+    @InjectView(R.id.citySP)
+    Spinner citySP;
+    @InjectView(R.id.stateSP)
+    Spinner stateSP;
+    @InjectView(R.id.countrySP)
+    Spinner countrySP;
+    /*@InjectView(R.id.landMarkET)
     EditText landMarkET;
     @InjectView(R.id.cityET)
-    EditText cityET;
+    EditText cityET;*/
     private Validation validation;
     private HashMap<View, String> formValues;
     private String genderStr;
+
+
+    CityAdapter cityAdapter;
+    StateAdapter stateAdapter;
+    CountryAdapter countryAdapter;
+
+    private ArrayList<CityModel> cityModels = new ArrayList<>();
+    private ArrayList<StateModel> stateModels = new ArrayList<>();
+    private ArrayList<CountryModel> countryModels = new ArrayList<>();
+
+    private String selectedCityName, selectedStateName, selectedCountryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +103,19 @@ public class SignUpActivity extends BaseActivity {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.sign_up));
         validation = new Validation();
         addValidation();
+        citySP.setOnItemSelectedListener(this);
+        stateSP.setOnItemSelectedListener(this);
+        countrySP.setOnItemSelectedListener(this);
+
+        cityAdapter = new CityAdapter(this, 0, cityModels);
+        stateAdapter = new StateAdapter(this, 0, stateModels);
+        countryAdapter = new CountryAdapter(this, 0, countryModels);
+
+        citySP.setAdapter(cityAdapter);
+        stateSP.setAdapter(stateAdapter);
+        countrySP.setAdapter(countryAdapter);
+
+        CallWebService.getInstance(this, true, ApiCodes.GET_COUNTRY).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_COUNTRIES, null, this);
     }
 
     private void addValidation() {
@@ -106,7 +148,27 @@ public class SignUpActivity extends BaseActivity {
     @Override
     public void onJsonObjectSuccess(JSONObject response, int apiType) throws JSONException {
         super.onJsonObjectSuccess(response, apiType);
-        CustomAlertDialogs.showAlertDialog(this, getString(R.string.congratulation), response.getString(Constants.MESSAGE), this);
+        switch (apiType) {
+            case ApiCodes.GET_COUNTRY:
+                countryModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), CountryModel.class);
+                countryAdapter = new CountryAdapter(this, 0, countryModels);
+                countrySP.setAdapter(countryAdapter);
+                break;
+            case ApiCodes.GET_STATE:
+                stateModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), StateModel.class);
+                stateAdapter = new StateAdapter(this, 0, stateModels);
+                stateSP.setAdapter(stateAdapter);
+                break;
+            case ApiCodes.GET_CITY:
+                cityModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), CityModel.class);
+                cityAdapter = new CityAdapter(this, 0, cityModels);
+                citySP.setAdapter(cityAdapter);
+                break;
+            case ApiCodes.REGISTRATION:
+                CustomAlertDialogs.showAlertDialog(this, getString(R.string.congratulation), response.getString(Constants.MESSAGE), this);
+                break;
+        }
+
     }
 
     private JSONObject createJsonForSignUp() {
@@ -128,5 +190,48 @@ public class SignUpActivity extends BaseActivity {
     public void doAction() {
         super.doAction();
         onBackPressed();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.citySP:
+                selectedCityName = cityModels.get(position).getName();
+                break;
+            case R.id.stateSP:
+                selectedStateName = stateModels.get(position).getName();
+                CallWebService.getInstance(this, true, ApiCodes.GET_CITY).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_CITY, createJsonForGetCities(stateModels.get(position).getState_id()), this);
+                break;
+            case R.id.countrySP:
+                selectedCountryName = countryModels.get(position).getName();
+                CallWebService.getInstance(this, true, ApiCodes.GET_STATE).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_STATE, createJsonForGetStates(countryModels.get(position).getCountry_id()), this);
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private JSONObject createJsonForGetStates(String country_id) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.COUNTRY_ID, country_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+    }
+
+    private JSONObject createJsonForGetCities(String stateID) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.STATE_ID, stateID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 }

@@ -16,7 +16,7 @@ import com.example.divyanshujain.edoteng.GlobalClasses.BaseFragment;
 import com.example.divyanshujain.edoteng.Interfaces.SnackBarCallback;
 import com.example.divyanshujain.edoteng.Models.ProductDetailModel;
 import com.example.divyanshujain.edoteng.R;
-import com.example.divyanshujain.edoteng.Utils.AddToCartProducts;
+import com.example.divyanshujain.edoteng.Utils.ProductsSingleton;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.MySharedPereference;
 import com.neopixl.pixlui.components.textview.TextView;
@@ -125,7 +125,7 @@ public class CourseDescriptionFragment extends BaseFragment {
     }
 
     private void addProductToCart() {
-        AddToCartProducts.getInstance().addProductToCart(productDetailModel);
+        ProductsSingleton.getInstance().addProductToCart(productDetailModel);
         CustomToasts.getInstance(getContext()).showSuccessToast("Product Added Successfully!");
     }
 

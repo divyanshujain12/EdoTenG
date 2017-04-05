@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.example.divyanshujain.edoteng.Interfaces.RecyclerViewClick;
 import com.example.divyanshujain.edoteng.Models.ProductDetailModel;
 import com.example.divyanshujain.edoteng.R;
-import com.example.divyanshujain.edoteng.Utils.AddToCartProducts;
+import com.example.divyanshujain.edoteng.Utils.ProductsSingleton;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.neopixl.pixlui.components.textview.TextView;
 
@@ -28,7 +28,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     public CartAdapter(Context context, RecyclerViewClick recyclerViewClick) {
         this.recyclerViewClick = recyclerViewClick;
-        this.productDetailModels = AddToCartProducts.getInstance().getProductDetailModels();
+        this.productDetailModels = ProductsSingleton.getInstance().getProductDetailModels();
         this.context = context;
     }
 

@@ -23,4 +23,9 @@ public class CountryModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.country_id.equals(((CountryModel) obj).getCountry_id());
+    }
 }
