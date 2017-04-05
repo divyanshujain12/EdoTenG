@@ -20,6 +20,7 @@ import com.example.divyanshujain.edoteng.Models.ValidationModel;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
+import com.example.divyanshujain.edoteng.Utils.MySharedPereference;
 import com.example.divyanshujain.edoteng.Utils.ProductsSingleton;
 import com.example.divyanshujain.edoteng.Utils.Validation;
 import com.neopixl.pixlui.components.edittext.EditText;
@@ -223,6 +224,7 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
     private JSONObject createJsonForUpdateAddress() {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put(Constants.USER_ID, MySharedPereference.getInstance().getString(this,Constants.USER_ID));
             jsonObject.put(Constants.NAME, hashMap.get(fullNameET));
             jsonObject.put(Constants.ADDRESS_ONE, hashMap.get(flatNumberET));
             jsonObject.put(Constants.ADDRESS_TWO, hashMap.get(localityET));

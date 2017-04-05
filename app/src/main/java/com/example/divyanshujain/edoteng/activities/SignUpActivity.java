@@ -88,7 +88,7 @@ public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSe
     private ArrayList<StateModel> stateModels = new ArrayList<>();
     private ArrayList<CountryModel> countryModels = new ArrayList<>();
 
-    private String selectedCityName, selectedStateName, selectedCountryName;
+    private String selectedCityID, selectedStateID, selectedCountryID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +125,11 @@ public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSe
         validation.addValidationField(new ValidationModel(emailET, Validation.TYPE_EMAIL_VALIDATION, getString(R.string.err_email)));
         validation.addValidationField(new ValidationModel(passwordET, Validation.TYPE_PASSWORD_VALIDATION, getString(R.string.err_pass)));
         validation.addValidationField(new ValidationModel(confPasswordET, Validation.TYPE_PASSWORD_VALIDATION, getString(R.string.err_re_enter_pass)));
+        validation.addValidationField(new ValidationModel(fullNameET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.USERNAME_EMPTY_FIELD_VALIDATION));
+        validation.addValidationField(new ValidationModel(phoneNumberET, Validation.TYPE_PHONE_VALIDATION, Validation.PHONE_VALID_FIELD_VALIDATION));
+        validation.addValidationField(new ValidationModel(flatNumberET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
+        validation.addValidationField(new ValidationModel(localityET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
+        validation.addValidationField(new ValidationModel(pinCodeET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
     }
 
 
@@ -178,6 +183,14 @@ public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSe
             jsonObject.put(Constants.PHONE_NUMBER, formValues.get(phoneET));
             jsonObject.put(Constants.EMAIl, formValues.get(emailET));
             jsonObject.put(Constants.PASSWORD, formValues.get(passwordET));
+            jsonObject.put(Constants.NAME, formValues.get(fullNameET));
+            jsonObject.put(Constants.ADDRESS_ONE, formValues.get(flatNumberET));
+            jsonObject.put(Constants.ADDRESS_TWO, formValues.get(localityET));
+            jsonObject.put(Constants.PIN, formValues.get(pinCodeET));
+            jsonObject.put(Constants.PHONE, formValues.get(phoneNumberET));
+            jsonObject.put(Constants.CITY, selectedCityID);
+            jsonObject.put(Constants.STATE, selectedStateID);
+            jsonObject.put(Constants.COUNTRY, selectedCountryID);
 
 
         } catch (JSONException e) {
@@ -196,14 +209,14 @@ public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.citySP:
-                selectedCityName = cityModels.get(position).getName();
+                selectedCityID = cityModels.get(position).getCity_id();
                 break;
             case R.id.stateSP:
-                selectedStateName = stateModels.get(position).getName();
+                selectedStateID = stateModels.get(position).getState_id();
                 CallWebService.getInstance(this, true, ApiCodes.GET_CITY).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_CITY, createJsonForGetCities(stateModels.get(position).getState_id()), this);
                 break;
             case R.id.countrySP:
-                selectedCountryName = countryModels.get(position).getName();
+                selectedCountryID = countryModels.get(position).getCountry_id();
                 CallWebService.getInstance(this, true, ApiCodes.GET_STATE).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_STATE, createJsonForGetStates(countryModels.get(position).getCountry_id()), this);
                 break;
         }

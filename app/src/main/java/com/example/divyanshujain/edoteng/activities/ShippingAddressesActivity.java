@@ -70,7 +70,7 @@ public class ShippingAddressesActivity extends BaseActivity {
     private CityModel cityModel = new CityModel();
     private String selectedCityName, selectedStateName, selectedCountryName;
     int selectedCountryPos, selectedStatePos, selectedCityPos;
-
+    private String completeAddress = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +81,8 @@ public class ShippingAddressesActivity extends BaseActivity {
 
     private void initViews() {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.ship_addresses));
-
+        stateTV.setVisibility(View.GONE);
+        countryTV.setVisibility(View.GONE);
 
     }
 
@@ -112,14 +113,16 @@ public class ShippingAddressesActivity extends BaseActivity {
         selectedCityName = ProductsSingleton.getInstance().cityModels.get(selectedCityPos).getName();
         ProductsSingleton.getInstance().addressModel.setCity(String.valueOf(selectedCityPos));
 
-        cityTV.setText(selectedCityName);
+
+        completeAddress = selectedCityName + "," + selectedStateName + "," + selectedCountryName;
+        cityTV.setText(getString(R.string.address) + completeAddress);
     }
 
     private void parseStateData(JSONObject response) throws JSONException {
         ProductsSingleton.getInstance().stateModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), StateModel.class);
         selectedStatePos = ProductsSingleton.getInstance().stateModels.indexOf(stateModel);
         selectedStateName = ProductsSingleton.getInstance().stateModels.get(selectedStatePos).getName();
-        stateTV.setText(selectedStateName);
+        stateTV.setText("");
         ProductsSingleton.getInstance().addressModel.setState(String.valueOf(selectedStatePos));
         CallWebService.getInstance(this, true, ApiCodes.GET_CITY).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_CITY, createJsonForGetCities(stateModel.getState_id()), this);
     }
@@ -128,16 +131,16 @@ public class ShippingAddressesActivity extends BaseActivity {
         ProductsSingleton.getInstance().countryModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), CountryModel.class);
         selectedCountryPos = ProductsSingleton.getInstance().countryModels.indexOf(countryModel);
         selectedCountryName = ProductsSingleton.getInstance().countryModels.get(selectedCountryPos).getName();
-        countryTV.setText(selectedCountryName);
+        countryTV.setText("");
         CallWebService.getInstance(this, true, ApiCodes.GET_STATE).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_STATE, createJsonForGetStates(countryModel.getCountry_id()), this);
         ProductsSingleton.getInstance().addressModel.setCountry(String.valueOf(selectedCountryPos));
     }
 
     private void changeUi(AddressModel addressModel) {
-        fullNameTV.setText(addressModel.getName());
-        phoneNumberTV.setText(addressModel.getPhone());
-        pincodeTV.setText(addressModel.getPin());
-        addressTV.setText(addressModel.getAddress1());
+        fullNameTV.setText(getString(R.string.name) + "-" + addressModel.getName());
+        phoneNumberTV.setText(getString(R.string.phone_number) + "-" + addressModel.getPhone());
+        pincodeTV.setText(getString(R.string.pin_code) + "-" + addressModel.getPin());
+        addressTV.setText(getString(R.string.flat_house_number_floor_building) + "-" + addressModel.getAddress1());
         countryModel.setCountry_id(addressModel.getCountry());
         stateModel.setState_id(addressModel.getState());
         cityModel.setCity_id(addressModel.getCity());
