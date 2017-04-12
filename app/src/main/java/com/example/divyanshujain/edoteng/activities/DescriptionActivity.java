@@ -114,6 +114,9 @@ public class DescriptionActivity extends BaseActivity {
             case R.id.action_cart:
                 startActivity(new Intent(this, CartActivity.class));
                 break;
+            case R.id.action_user_setting:
+                startActivity(new Intent(this, ApplicationSettingActivity.class));
+                break;
         }
         return true;
     }

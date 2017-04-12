@@ -10,8 +10,8 @@
         android:title="@string/cart"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_user_profile"
-        android:icon="@drawable/ic_white_profile"
+        android:id="@+id/action_user_setting"
+        android:icon="@drawable/ic_setting_white"
         android:orderInCategory="101"
         android:title="@string/cart"
         app:showAsAction="always" />

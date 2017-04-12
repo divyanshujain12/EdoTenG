@@ -74,21 +74,6 @@ public class CartActivity extends BaseActivity {
                 break;
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.cart_menu, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = null;
-        switch (item.getItemId()) {
-        }
-        return true;
-    }
-
     @OnClick({R.id.checkoutFAB})
     public void onClick(View view) {
         switch (view.getId()) {

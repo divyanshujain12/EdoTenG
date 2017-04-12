@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/five_dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            android:id="@+id/settingTypeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="@dimen/five_dp"
+            android:text="@string/course_description"
+            android:textSize="@dimen/sixteen_sp"
+            pixlui:typeface="Roboto-Medium.ttf" />
+
+        <ImageView
+            android:layout_width="@dimen/fourty_dp"
+            android:layout_height="@dimen/fourty_dp"
+            android:padding="@dimen/five_dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/ic_next_circle" />
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

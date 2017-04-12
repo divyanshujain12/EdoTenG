@@ -28,4 +28,9 @@
         <item>Test Series</item>
         <item>Videos</item>
     </string-array>
+    <string-array name="app_setting">
+        <item>About Us</item>
+        <item>Term and conditions</item>
+        <item>return policy</item>
+    </string-array>
 </resources>

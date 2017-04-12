@@ -94,5 +94,6 @@
     <string name="locality">Locality</string>
     <string name="country">Country</string>
     <string name="address">Address-</string>
+    <string name="settings">Settings</string>
 
 </resources>

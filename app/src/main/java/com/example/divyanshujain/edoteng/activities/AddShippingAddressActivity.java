@@ -90,7 +90,7 @@ public class AddShippingAddressActivity extends BaseActivity implements AdapterV
     }
 
     private void initViews() {
-        CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, "Add Address");
+        CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, "Update Address");
 
         validation = new Validation();
         validation.addValidationField(new ValidationModel(fullNameET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.USERNAME_EMPTY_FIELD_VALIDATION));
