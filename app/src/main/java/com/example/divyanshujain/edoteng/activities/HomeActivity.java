@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -33,7 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity implements AdapterView.OnItemSelectedListener{
+public class HomeActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     @InjectView(R.id.categorySP)
     Spinner categorySP;
@@ -51,11 +52,21 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
     Toolbar toolbarView;
     @InjectView(R.id.searchKeyTV)
     TextView searchKeyTV;
+    @InjectView(R.id.categoryLL)
+    LinearLayout categoryLL;
+    @InjectView(R.id.subCategoryLL)
+    LinearLayout subCategoryLL;
+    @InjectView(R.id.subSubCategoryLL)
+    LinearLayout subSubCategoryLL;
+    @InjectView(R.id.searchIV)
+    ImageView searchIV;
 
     private ArrayList<HomeSpinnerModel> categoryArray, subCategoryArray, subSubCategoryArray;
     private HomeSpinnerAdapter categoryAdapter, subCategoryAdapter, subSubCategoryAdapter;
     private String categoryName, subCategoryName, subSubCategoryName;
     private String ID = "";
+    private HomeSpinnerModel homeSpinnerModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +80,11 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
         categorySP.setOnItemSelectedListener(this);
         subCategorySP.setOnItemSelectedListener(this);
         subSubCategorySP.setOnItemSelectedListener(this);
+        homeSpinnerModel = new HomeSpinnerModel();
+        homeSpinnerModel.setId("0");
+        homeSpinnerModel.setName("Please Select");
+        showHideSpinnerLayout(subCategoryLL, false);
+        showHideSpinnerLayout(subSubCategoryLL, false);
 
         CallWebService.getInstance(this, true, ApiCodes.CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_ALL_CATEGORIES, null, this);
     }
@@ -97,19 +113,27 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
         switch (apiType) {
             case ApiCodes.CATEGORIES:
                 categoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
+                categoryArray.add(0, homeSpinnerModel);
                 categoryAdapter = new HomeSpinnerAdapter(this, categoryArray);
                 categorySP.setAdapter(categoryAdapter);
 
                 break;
             case ApiCodes.SUB_CATEGORIES:
                 subCategoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
-                subCategoryAdapter = new HomeSpinnerAdapter(this, subCategoryArray);
-                subCategorySP.setAdapter(subCategoryAdapter);
+                if (subCategoryArray.size() > 0) {
+                    showHideSpinnerLayout(subCategoryLL, true);
+                    subCategoryArray.add(0, homeSpinnerModel);
+                    subCategoryAdapter = new HomeSpinnerAdapter(this, subCategoryArray);
+                    subCategorySP.setAdapter(subCategoryAdapter);
+                }
                 break;
             case ApiCodes.SUB_SUB_CATEGORIES:
                 subSubCategoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
-                subSubCategoryAdapter = new HomeSpinnerAdapter(this, subSubCategoryArray);
-                subSubCategorySP.setAdapter(subSubCategoryAdapter);
+                if (subSubCategoryArray.size() > 0) {
+                    showHideSpinnerLayout(subSubCategoryLL, true);
+                    subSubCategoryAdapter = new HomeSpinnerAdapter(this, subSubCategoryArray);
+                    subSubCategorySP.setAdapter(subSubCategoryAdapter);
+                }
                 break;
         }
 
@@ -145,18 +169,30 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.categorySP:
-                CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(categoryArray.get(position).getId()), this);
-                categoryName = categoryArray.get(position).getName();
-                ID = categoryArray.get(position).getId();
+                if (position > 0) {
+                    CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(categoryArray.get(position).getId()), this);
+                    categoryName = categoryArray.get(position).getName();
+                    ID = categoryArray.get(position).getId();
+                } else {
+                    categoryName = "";
+                }
                 break;
             case R.id.subCategorySP:
-                CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(subCategoryArray.get(position).getId()), this);
-                subCategoryName = subCategoryArray.get(position).getName();
-                ID = subCategoryArray.get(position).getId();
+                if (position > 0) {
+                    CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(subCategoryArray.get(position).getId()), this);
+                    subCategoryName = subCategoryArray.get(position).getName();
+                    ID = subCategoryArray.get(position).getId();
+                } else {
+                    subSubCategoryName = "";
+                }
                 break;
             case R.id.subSubCategorySP:
-                subSubCategoryName = subSubCategoryArray.get(position).getName();
-                ID = subSubCategoryArray.get(position).getId();
+                if (position > 0) {
+                    subSubCategoryName = subSubCategoryArray.get(position).getName();
+                    ID = subSubCategoryArray.get(position).getId();
+                } else {
+                    subSubCategoryName = "";
+                }
                 break;
         }
 
@@ -175,5 +211,12 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
             e.printStackTrace();
         }
         return jsonObject;
+    }
+
+    private void showHideSpinnerLayout(LinearLayout linearLayout, boolean show) {
+        if (show)
+            linearLayout.setVisibility(View.VISIBLE);
+        else
+            linearLayout.setVisibility(View.GONE);
     }
 }

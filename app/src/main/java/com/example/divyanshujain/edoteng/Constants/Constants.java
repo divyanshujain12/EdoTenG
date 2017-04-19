@@ -45,4 +45,5 @@ public interface Constants {
     String STATE = "state";
     String COUNTRY = "country";
     String PHONE = "phone";
+    String TERM = "term";
 }
