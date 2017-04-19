@@ -29,6 +29,7 @@ public class AutoCompleteArrayAdapter extends BaseAdapter {
         this.recyclerViewClick = recyclerViewClick;
         this.autoSearchKewordModels = new ArrayList<>(autoSearchKewordModels);
 
+
     }
 
     @Override
