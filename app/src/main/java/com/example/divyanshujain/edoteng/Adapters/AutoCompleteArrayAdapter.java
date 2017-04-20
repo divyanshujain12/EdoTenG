@@ -1,59 +1,58 @@
 package com.example.divyanshujain.edoteng.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.example.divyanshujain.edoteng.Interfaces.RecyclerViewClick;
 import com.example.divyanshujain.edoteng.Models.AutoSearchKeywordModel;
 import com.example.divyanshujain.edoteng.R;
+import com.neopixl.pixlui.components.textview.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class AutoCompleteArrayAdapter extends BaseAdapter {
+public class AutoCompleteArrayAdapter extends ArrayAdapter<AutoSearchKeywordModel> {
     private final Context mContext;
-    private final ArrayList<AutoSearchKeywordModel> autoSearchKewordModels;
+    private final ArrayList<AutoSearchKeywordModel> autoSearchKeywordModels;
     private final int mLayoutResourceId;
     private RecyclerViewClick recyclerViewClick;
 
 
-    public AutoCompleteArrayAdapter(Context context, int resource, ArrayList<AutoSearchKeywordModel> autoSearchKewordModels, RecyclerViewClick recyclerViewClick) {
+    public AutoCompleteArrayAdapter(Context context, int resource, ArrayList<AutoSearchKeywordModel> autoSearchKeywordModels, RecyclerViewClick recyclerViewClick) {
+        super(context, resource, autoSearchKeywordModels);
         this.mContext = context;
         this.mLayoutResourceId = resource;
         this.recyclerViewClick = recyclerViewClick;
-        this.autoSearchKewordModels = new ArrayList<>(autoSearchKewordModels);
-
-
+        this.autoSearchKeywordModels = new ArrayList<>(autoSearchKeywordModels);
     }
 
-    @Override
+
     public int getCount() {
-        return autoSearchKewordModels.size();
+        return autoSearchKeywordModels.size();
     }
 
     public AutoSearchKeywordModel getItem(int position) {
-        return autoSearchKewordModels.get(position);
+        return autoSearchKeywordModels.get(position);
     }
 
     public long getItemId(int position) {
         return position;
     }
 
-    @Override
+
     public View getView(final int position, View convertView, ViewGroup parent) {
         try {
             if (convertView == null) {
-                LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-                convertView = inflater.inflate(R.layout.auto_complete_array_adapter, parent, false);
+                getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = LayoutInflater.from(mContext);
+                convertView = inflater.inflate(mLayoutResourceId, null);
             }
-            AutoSearchKeywordModel autoSearchKeywordModel = getItem(position);
-            ((TextView) convertView).setText(autoSearchKeywordModel.getKeyword_title());
+            AutoSearchKeywordModel autoSearchKeywordModel = autoSearchKeywordModels.get(position);
+            TextView autoSearchTV = (TextView) convertView.findViewById(R.id.autoSearchTV);
+            autoSearchTV.setText(autoSearchKeywordModel.getKeyword_title());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,10 +66,11 @@ public class AutoCompleteArrayAdapter extends BaseAdapter {
         });
         return convertView;
     }
-    
+
+    @Override
     public void addAll(Collection<? extends AutoSearchKeywordModel> collection) {
-        autoSearchKewordModels.clear();
-        autoSearchKewordModels.addAll(collection);
+        autoSearchKeywordModels.clear();
+        autoSearchKeywordModels.addAll(collection);
         notifyDataSetChanged();
     }
 }

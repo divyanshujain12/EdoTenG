@@ -6,91 +6,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_marginTop="@dimen/ten_dp"
+    android:orientation="vertical"
     tools:showIn="@layout/course_description_fragment">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
-        android:orientation="vertical">
+        android:background="#EAEBFF"
+        android:orientation="vertical"
+        android:padding="@dimen/five_dp">
 
         <com.neopixl.pixlui.components.textview.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/physical_version_price"
-            android:textColor="@color/button_color"
-            android:textSize="@dimen/thirteen_sp"
-            pixlui:typeface="Roboto-Medium.ttf" />
-
-        <com.neopixl.pixlui.components.textview.TextView
-            android:id="@+id/physicalVersionPriceTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five_dp"
-            android:gravity="center"
-            android:text="RS 2400"
+            android:text="@string/prices"
             android:textColor="@color/button_color"
             android:textSize="@dimen/eighteen_sp"
-            pixlui:typeface="Roboto-Regular.ttf" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="4"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <com.neopixl.pixlui.components.textview.TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/digital_version_price"
-            android:textColor="@color/dark_grey"
-            android:textSize="@dimen/thirteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/physical_version_price"
+                    android:textColor="@color/button_color"
+                    android:textSize="@dimen/thirteen_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/physicalVersionPriceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:gravity="center"
+                    android:text="RS 2400"
+                    android:textColor="@color/button_color"
+                    android:textSize="@dimen/eighteen_sp"
+                    pixlui:typeface="Roboto-Regular.ttf" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/digital_version_price"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/thirteen_sp"
+                    pixlui:typeface="Roboto-Medium.ttf" />
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/digitalVersionPriceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:gravity="center"
+                    android:text="Free"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/eighteen_sp"
+                    pixlui:typeface="Roboto-Regular.ttf" />
+            </LinearLayout>
+        </LinearLayout>
+
         <com.neopixl.pixlui.components.textview.TextView
-            android:id="@+id/digitalVersionPriceTV"
+            android:id="@+id/shippingChargesTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/five_dp"
+            android:alpha=".5"
             android:gravity="center"
-            android:text="Free"
-            android:textColor="@color/dark_grey"
-            android:textSize="@dimen/eighteen_sp"
-            pixlui:typeface="Roboto-Regular.ttf" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:orientation="vertical">
-
-        <com.neopixl.pixlui.components.textview.TextView
-            android:id="@+id/fileTypeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="File Type: PDF"
+            android:text="(Free shipping)"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/thirteen_sp"
             pixlui:typeface="Roboto-Medium.ttf" />
-
-        <ImageView
-            android:id="@+id/fileTypeIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five_dp"
-            android:gravity="center"
-            android:src="@drawable/ic_type_pdf"
-
-            android:textSize="@dimen/sixteen_sp" />
     </LinearLayout>
+
+
 
 </LinearLayout>

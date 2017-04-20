@@ -3,7 +3,6 @@ package com.example.divyanshujain.edoteng.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -25,16 +23,15 @@ import com.example.divyanshujain.edoteng.Adapters.SpinnerAdapter;
 import com.example.divyanshujain.edoteng.Constants.API;
 import com.example.divyanshujain.edoteng.Constants.ApiCodes;
 import com.example.divyanshujain.edoteng.Constants.Constants;
+import com.example.divyanshujain.edoteng.CustomViews.CustomAutoCompleteView;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.Models.AutoSearchKeywordModel;
 import com.example.divyanshujain.edoteng.Models.BrandsModel;
 import com.example.divyanshujain.edoteng.Models.ProductModel;
-import com.example.divyanshujain.edoteng.Models.ValidationModel;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
 import com.example.divyanshujain.edoteng.Utils.UniversalParser;
-import com.example.divyanshujain.edoteng.Utils.Validation;
 import com.neopixl.pixlui.components.button.Button;
 import com.neopixl.pixlui.components.textview.TextView;
 
@@ -42,7 +39,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -79,7 +75,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
 
     SpinnerAdapter spinnerAdapter;
     @InjectView(R.id.searchAC)
-    AppCompatAutoCompleteTextView searchAC;
+    CustomAutoCompleteView searchAC;
     @InjectView(R.id.noDataTV)
     TextView noDataTV;
     private TextView selectedTV;
@@ -89,14 +85,17 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     private static String TEST_SERIES = "Test Series";
     private static String VIDEOS = "Videos";
 
+    private String selectedTextFromAC = "";
     private String selectedSearchType;
     private String[] sortingKeyArray, sortingValueArray;
-    Validation validation;
-    HashMap<View, String> hashMap;
+    //Validation validation;
+    // HashMap<View, String> hashMap;
     private String selectedBrandID = "", selectedOrderBy = "";
     ArrayList<BrandsModel> brandsModels;
     ArrayList<AutoSearchKeywordModel> autoSearchKeywordModels = new ArrayList<>();
     private AutoCompleteArrayAdapter autoCompleteArrayAdapter;
+    private ArrayList<String> autoSearchResult = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,19 +108,21 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     private void InitViews() {
         CommonFunctions.getInstance().configureToolbarWithBackButton(this, toolbarView, getString(R.string.search_with_keyword));
         setInitialValues();
-        validation = new Validation();
         sortingKeyArray = getResources().getStringArray(R.array.sorting_array);
         sortingValueArray = getResources().getStringArray(R.array.sorting_value_array);
-        validation.addValidationField(new ValidationModel(searchAC, Validation.TYPE_EMPTY_FIELD_VALIDATION, getString(R.string.err_msg_search)));
+        //validation.addValidationField(new ValidationModel(searchAC, Validation.TYPE_EMPTY_FIELD_VALIDATION, getString(R.string.err_msg_search)));
         searchKeyTV.setTextColor(Color.WHITE);
         searchedKeywordRV.setLayoutManager(new LinearLayoutManager(this));
+
         searchAdapter = new SearchAdapter(this, new ArrayList<ProductModel>(), this);
         searchedKeywordRV.setAdapter(searchAdapter);
+
         //CallWebService.getInstance(this, false, ApiCodes.GET_BRANDS).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_BRANDS, null, this);
         filterSP.setOnItemSelectedListener(this);
+
         searchAC.addTextChangedListener(this);
-        autoCompleteArrayAdapter = new AutoCompleteArrayAdapter(this, 0, autoSearchKeywordModels, this);
-        searchAC.setAdapter(autoCompleteArrayAdapter);
+
+
     }
 
     private void setInitialValues() {
@@ -133,9 +134,17 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
     @Override
     public void onClickItem(int position, View view) {
         super.onClickItem(position, view);
-        Intent intent = new Intent(this, DescriptionActivity.class);
-        intent.putExtra(Constants.MOD_URL, productModels.get(position).getMod_url());
-        startActivity(intent);
+        switch (view.getId()) {
+            case R.id.singleTextviewLL:
+                hitGetDataApi();
+                break;
+            default:
+                Intent intent = new Intent(this, DescriptionActivity.class);
+                intent.putExtra(Constants.MOD_URL, productModels.get(position).getMod_url());
+                startActivity(intent);
+                break;
+        }
+
     }
 
     @Override
@@ -144,7 +153,10 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
         switch (apiType) {
             case ApiCodes.GET_AUTO_SEARCH:
                 autoSearchKeywordModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), AutoSearchKeywordModel.class);
-                autoCompleteArrayAdapter.addAll(autoSearchKeywordModels);
+                autoCompleteArrayAdapter = new AutoCompleteArrayAdapter(this, R.layout.auto_complete_array_adapter, autoSearchKeywordModels, this);
+                searchAC.setAdapter(autoCompleteArrayAdapter);
+                searchAC.setThreshold(1);
+                searchAC.showDropDown();
                 break;
             case ApiCodes.GET_BRANDS:
                 brandsModels = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), BrandsModel.class);
@@ -218,8 +230,12 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
 
     @OnClick(R.id.searchBT)
     public void onClick() {
-        hashMap = validation.validate(this);
-        if (hashMap != null) {
+        hitGetDataApi();
+    }
+
+    private void hitGetDataApi() {
+        selectedTextFromAC = searchAC.getText().toString();
+        if (selectedTextFromAC.length() > 0) {
             CallWebService.getInstance(this, true, ApiCodes.SEARCH).hitJsonObjectRequestAPI(CallWebService.POST, API.PRODUCT_LISTING_FILER, createJsonForGettingSearchResult(), this);
         }
     }
@@ -228,7 +244,7 @@ public class SearchByKeywordActivity extends BaseActivity implements AdapterView
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(Constants.SEARCH_KEYWORDS, hashMap.get(searchAC));
+            jsonObject.put(Constants.SEARCH_KEYWORDS, selectedTextFromAC);
             jsonObject.put(Constants.SEARCH_TYPE, selectedSearchType);
             jsonObject.put(Constants.C_BRAND_ID, selectedBrandID);
             jsonObject.put(Constants.ORDER_BY, selectedOrderBy);

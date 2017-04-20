@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:id="@+id/singleTextviewLL"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:padding="@dimen/five_dp">
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/autoSearchTV"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Hello"
-    android:textSize="@dimen/eighteen_sp" />
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/autoSearchTV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:padding="@dimen/two_dp"
+        android:text="divyanshu jain"
+        android:textColorHint="@color/colorPrimary"
+        android:textSize="@dimen/sixteen_sp"
+        pixlui:typeface="Roboto-Regular.ttf" />
+</LinearLayout>

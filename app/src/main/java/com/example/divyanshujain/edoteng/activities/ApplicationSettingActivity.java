@@ -11,6 +11,7 @@ import com.example.divyanshujain.edoteng.Adapters.AppSettingRVAdapter;
 import com.example.divyanshujain.edoteng.GlobalClasses.BaseActivity;
 import com.example.divyanshujain.edoteng.R;
 import com.example.divyanshujain.edoteng.Utils.CommonFunctions;
+import com.example.divyanshujain.edoteng.Utils.MySharedPereference;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -53,7 +54,13 @@ public class ApplicationSettingActivity extends BaseActivity {
                 break;
             case 2:
                 break;
-
+            case 3:
+                MySharedPereference.getInstance().clearSharedPreference(this);
+               Intent intent = new Intent(this,LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                break;
         }
     }
 }

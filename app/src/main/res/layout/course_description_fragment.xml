@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/course_description_bottom_sheet" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,8 +18,10 @@
             android:padding="@dimen/ten_dp">
 
             <include layout="@layout/desc_product_name_seller_name" />
+
             <include layout="@layout/desc_frag_rate_bar" />
 
+            <include layout="@layout/product_desc_bottom_language_bar" />
 
             <com.neopixl.pixlui.components.textview.TextView
                 android:id="@+id/descriptionTV"
@@ -30,6 +34,4 @@
                 pixlui:typeface="Roboto-Medium.ttf" />
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/course_description_bottom_sheet" />
 </FrameLayout>

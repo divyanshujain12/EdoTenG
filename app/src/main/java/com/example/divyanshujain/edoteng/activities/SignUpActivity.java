@@ -125,11 +125,11 @@ public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSe
         validation.addValidationField(new ValidationModel(emailET, Validation.TYPE_EMAIL_VALIDATION, getString(R.string.err_email)));
         validation.addValidationField(new ValidationModel(passwordET, Validation.TYPE_PASSWORD_VALIDATION, getString(R.string.err_pass)));
         validation.addValidationField(new ValidationModel(confPasswordET, Validation.TYPE_PASSWORD_VALIDATION, getString(R.string.err_re_enter_pass)));
-        validation.addValidationField(new ValidationModel(fullNameET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.USERNAME_EMPTY_FIELD_VALIDATION));
-        validation.addValidationField(new ValidationModel(phoneNumberET, Validation.TYPE_PHONE_VALIDATION, Validation.PHONE_VALID_FIELD_VALIDATION));
-        validation.addValidationField(new ValidationModel(flatNumberET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
-        validation.addValidationField(new ValidationModel(localityET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
-        validation.addValidationField(new ValidationModel(pinCodeET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
+        //validation.addValidationField(new ValidationModel(fullNameET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.USERNAME_EMPTY_FIELD_VALIDATION));
+        //validation.addValidationField(new ValidationModel(phoneNumberET, Validation.TYPE_PHONE_VALIDATION, Validation.PHONE_VALID_FIELD_VALIDATION));
+        //validation.addValidationField(new ValidationModel(flatNumberET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
+        //validation.addValidationField(new ValidationModel(localityET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
+        //validation.addValidationField(new ValidationModel(pinCodeET, Validation.TYPE_EMPTY_FIELD_VALIDATION, Validation.ALL_FILED_MANDATORY));
     }
 
 
@@ -183,14 +183,14 @@ public class SignUpActivity extends BaseActivity implements AdapterView.OnItemSe
             jsonObject.put(Constants.PHONE_NUMBER, formValues.get(phoneET));
             jsonObject.put(Constants.EMAIl, formValues.get(emailET));
             jsonObject.put(Constants.PASSWORD, formValues.get(passwordET));
-            jsonObject.put(Constants.NAME, formValues.get(fullNameET));
+            /*jsonObject.put(Constants.NAME, formValues.get(fullNameET));
             jsonObject.put(Constants.ADDRESS_ONE, formValues.get(flatNumberET));
             jsonObject.put(Constants.ADDRESS_TWO, formValues.get(localityET));
             jsonObject.put(Constants.PIN, formValues.get(pinCodeET));
             jsonObject.put(Constants.PHONE, formValues.get(phoneNumberET));
             jsonObject.put(Constants.CITY, selectedCityID);
             jsonObject.put(Constants.STATE, selectedStateID);
-            jsonObject.put(Constants.COUNTRY, selectedCountryID);
+            jsonObject.put(Constants.COUNTRY, selectedCountryID);*/
 
 
         } catch (JSONException e) {

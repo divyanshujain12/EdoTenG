@@ -32,5 +32,6 @@
         <item>About Us</item>
         <item>Term and conditions</item>
         <item>return policy</item>
+        <item>Logout</item>
     </string-array>
 </resources>

@@ -94,6 +94,7 @@ public class CourseDescriptionFragment extends BaseFragment {
             productNameTV.setText(productDetailModel.getProduct_name());
             sellerNameTV.setText(productDetailModel.getMetaTitle());
             descriptionTV.setText(productDetailModel.getShort_description());
+            
         }
     }
 
