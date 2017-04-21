@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.example.divyanshujain.edoteng.Adapters.ViewPagerAdapter;
@@ -42,14 +43,14 @@ public class DescriptionActivity extends BaseActivity {
     TextView descTV;
     @InjectView(R.id.reviewTV)
     TextView reviewTV;
-
-
     @InjectView(R.id.productViewsVp)
     NonSwipeableViewPager productViewsVp;
 
     ViewPagerAdapter viewPagerAdapter;
     @InjectView(R.id.activity_description)
     LinearLayout activityDescription;
+    @InjectView(R.id.productFL)
+    FrameLayout productFL;
     private View lastSelectedView;
 
     @Override
@@ -144,7 +145,7 @@ public class DescriptionActivity extends BaseActivity {
        /* if (getIntent().getIntExtra(Constants.FROM_CART, 0) == 1) {
             setUpViewPager((ProductDetailModel) getIntent().getParcelableExtra(Constants.DATA));
         } else {*/
-            CallWebService.getInstance(this, true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL, createJsonForGetProductDetail(), this);
+        CallWebService.getInstance(this, true, ApiCodes.GET_PRODUCT_DETAIL).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_PRODUCT_DETAIL, createJsonForGetProductDetail(), this);
 //        }
     }
 }

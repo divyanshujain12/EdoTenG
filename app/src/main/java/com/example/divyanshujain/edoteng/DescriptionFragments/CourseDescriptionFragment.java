@@ -16,9 +16,9 @@ import com.example.divyanshujain.edoteng.GlobalClasses.BaseFragment;
 import com.example.divyanshujain.edoteng.Interfaces.SnackBarCallback;
 import com.example.divyanshujain.edoteng.Models.ProductDetailModel;
 import com.example.divyanshujain.edoteng.R;
-import com.example.divyanshujain.edoteng.Utils.ProductsSingleton;
 import com.example.divyanshujain.edoteng.Utils.CallWebService;
 import com.example.divyanshujain.edoteng.Utils.MySharedPereference;
+import com.example.divyanshujain.edoteng.Utils.ProductsSingleton;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import org.json.JSONException;
@@ -37,8 +37,7 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView physicalVersionPriceTV;
     @InjectView(R.id.digitalVersionPriceTV)
     TextView digitalVersionPriceTV;
-    @InjectView(R.id.fileTypeTV)
-    TextView fileTypeTV;
+
     @InjectView(R.id.fileTypeIV)
     ImageView fileTypeIV;
     @InjectView(R.id.productNameTV)
@@ -53,6 +52,14 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView addToCartTV;
     @InjectView(R.id.addToWishListTV)
     TextView addToWishListTV;
+    @InjectView(R.id.shippingChargesTV)
+    TextView shippingChargesTV;
+    @InjectView(R.id.languageTV)
+    TextView languageTV;
+    @InjectView(R.id.durationTV)
+    TextView durationTV;
+    @InjectView(R.id.versionTV)
+    TextView versionTV;
 
     private ProductDetailModel productDetailModel = null;
 
@@ -90,11 +97,13 @@ public class CourseDescriptionFragment extends BaseFragment {
         if (productDetailModel != null) {
             physicalVersionPriceTV.setText(getString(R.string.rs) + productDetailModel.getPhysical_price());
             digitalVersionPriceTV.setText(getString(R.string.rs) + productDetailModel.getDownloadable_price());
-            fileTypeTV.setText(getString(R.string.file_type) + productDetailModel.getItem_type());
             productNameTV.setText(productDetailModel.getProduct_name());
             sellerNameTV.setText(productDetailModel.getMetaTitle());
             descriptionTV.setText(productDetailModel.getShort_description());
-            
+            shippingChargesTV.setText(getString(R.string.shipping_charges) + productDetailModel.getShipping());
+            languageTV.setText(productDetailModel.getLanguage());
+            versionTV.setText(productDetailModel.getVersion());
+            durationTV.setText(productDetailModel.getDuration());
         }
     }
 
@@ -120,7 +129,7 @@ public class CourseDescriptionFragment extends BaseFragment {
                 if (productDetailModel.getCan_physical_purchase().equals("1") && !productDetailModel.getPhysical_price().equals("0"))
                     addProductToCart();
                 else
-                    CustomToasts.getInstance(getContext()).showErrorToast("No For Purchase!");
+                    CustomToasts.getInstance(getContext()).showErrorToast("Not For Purchase!");
                 break;
         }
     }
