@@ -38,7 +38,6 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView physicalVersionPriceTV;
     @InjectView(R.id.digitalVersionPriceTV)
     TextView digitalVersionPriceTV;
-
     @InjectView(R.id.fileTypeIV)
     ImageView fileTypeIV;
     @InjectView(R.id.productNameTV)
@@ -53,6 +52,14 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView addToCartTV;
     @InjectView(R.id.addToWishListTV)
     TextView addToWishListTV;
+    @InjectView(R.id.shippingChargesTV)
+    TextView shippingChargesTV;
+    @InjectView(R.id.languageTV)
+    TextView languageTV;
+    @InjectView(R.id.durationTV)
+    TextView durationTV;
+    @InjectView(R.id.versionTV)
+    TextView versionTV;
 
     private ProductDetailModel productDetailModel = null;
 
@@ -93,7 +100,9 @@ public class CourseDescriptionFragment extends BaseFragment {
             productNameTV.setText(productDetailModel.getProduct_name());
             sellerNameTV.setText(productDetailModel.getMetaTitle());
             descriptionTV.setText(Html.fromHtml(productDetailModel.getShort_description()));
-
+            durationTV.setText(productDetailModel.getDuration());
+            versionTV.setText(productDetailModel.getVersion());
+            languageTV.setText(productDetailModel.getLanguage());
         }
     }
 
