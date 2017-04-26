@@ -116,7 +116,6 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
                 categoryArray.add(0, homeSpinnerModel);
                 categoryAdapter = new HomeSpinnerAdapter(this, categoryArray);
                 categorySP.setAdapter(categoryAdapter);
-
                 break;
             case ApiCodes.SUB_CATEGORIES:
                 subCategoryArray = UniversalParser.getInstance().parseJsonArrayWithJsonObject(response.getJSONArray(Constants.DATA), HomeSpinnerModel.class);
@@ -179,7 +178,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemSele
                 break;
             case R.id.subCategorySP:
                 if (position > 0) {
-                    CallWebService.getInstance(this, true, ApiCodes.SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(subCategoryArray.get(position).getId()), this);
+                    CallWebService.getInstance(this, true, ApiCodes.SUB_SUB_CATEGORIES).hitJsonObjectRequestAPI(CallWebService.POST, API.GET_SUB_AND_SUB_SUB_CAT, createJsonForGetData(subCategoryArray.get(position).getId()), this);
                     subCategoryName = subCategoryArray.get(position).getName();
                     ID = subCategoryArray.get(position).getId();
                 } else {

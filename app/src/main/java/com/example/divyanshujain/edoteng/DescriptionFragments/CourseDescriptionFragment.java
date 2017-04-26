@@ -2,6 +2,7 @@ package com.example.divyanshujain.edoteng.DescriptionFragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,6 @@ public class CourseDescriptionFragment extends BaseFragment {
     TextView addToCartTV;
     @InjectView(R.id.addToWishListTV)
     TextView addToWishListTV;
-    @InjectView(R.id.shippingChargesTV)
-    TextView shippingChargesTV;
-    @InjectView(R.id.languageTV)
-    TextView languageTV;
-    @InjectView(R.id.durationTV)
-    TextView durationTV;
-    @InjectView(R.id.versionTV)
-    TextView versionTV;
 
     private ProductDetailModel productDetailModel = null;
 
@@ -99,11 +92,8 @@ public class CourseDescriptionFragment extends BaseFragment {
             digitalVersionPriceTV.setText(getString(R.string.rs) + productDetailModel.getDownloadable_price());
             productNameTV.setText(productDetailModel.getProduct_name());
             sellerNameTV.setText(productDetailModel.getMetaTitle());
-            descriptionTV.setText(productDetailModel.getShort_description());
-            shippingChargesTV.setText(getString(R.string.shipping_charges) + productDetailModel.getShipping());
-            languageTV.setText(productDetailModel.getLanguage());
-            versionTV.setText(productDetailModel.getVersion());
-            durationTV.setText(productDetailModel.getDuration());
+            descriptionTV.setText(Html.fromHtml(productDetailModel.getShort_description()));
+
         }
     }
 
@@ -129,7 +119,7 @@ public class CourseDescriptionFragment extends BaseFragment {
                 if (productDetailModel.getCan_physical_purchase().equals("1") && !productDetailModel.getPhysical_price().equals("0"))
                     addProductToCart();
                 else
-                    CustomToasts.getInstance(getContext()).showErrorToast("Not For Purchase!");
+                    CustomToasts.getInstance(getContext()).showErrorToast("No For Purchase!");
                 break;
         }
     }

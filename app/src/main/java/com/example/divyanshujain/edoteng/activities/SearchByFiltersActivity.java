@@ -117,6 +117,7 @@ public class SearchByFiltersActivity extends BaseActivity implements AdapterView
     public void onClickItem(int position, View view) {
         super.onClickItem(position, view);
         Intent intent = new Intent(this, DescriptionActivity.class);
+        intent.putExtra(Constants.MOD_URL, productModels.get(position).getMod_url());
         startActivity(intent);
     }
 
